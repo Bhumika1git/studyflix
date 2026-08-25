@@ -1,0 +1,204 @@
+/* =========================================
+   STUDYFLIX — LANDING PAGE
+   Page-specific styles only.
+   Shared tokens live in design-system.css.
+   ========================================= */
+
+/* ---------- NAVBAR ---------- */
+
+.landing-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+
+  padding: var(--space-md) var(--page-padding);
+
+  border-bottom: 1px solid var(--surface);
+
+  color: var(--text);
+  background: transparent;
+}
+
+.landing-navbar-brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+
+  color: var(--text);
+  text-decoration: none;
+}
+
+.landing-navbar-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.landing-navbar-link {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  color: var(--text);
+
+  opacity: 0.7;
+
+  transition: opacity var(--transition-normal);
+}
+
+.landing-navbar-link:hover {
+  opacity: 1;
+}
+
+.landing-navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* ---------- HERO ---------- */
+
+.landing-hero {
+  width: min(
+    var(--content-width),
+    calc(100% - (var(--page-padding) * 2))
+  );
+
+  min-height: calc(100vh - 80px);
+
+  margin-inline: auto;
+
+  display: flex;
+  align-items: center;
+
+  padding-block: var(--space-2xl);
+}
+
+.landing-hero-content {
+  max-width: 760px;
+}
+
+/* ---------- EYEBROW ---------- */
+
+.landing-hero-eyebrow {
+  margin-bottom: var(--space-md);
+
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+
+  color: var(--accent);
+}
+
+/* ---------- TITLE ---------- */
+
+.landing-hero-title {
+  margin-bottom: var(--space-lg);
+
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+
+  color: var(--text);
+}
+
+/* ---------- DESCRIPTION ---------- */
+
+.landing-hero-description {
+  max-width: 560px;
+
+  margin-bottom: var(--space-lg);
+
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+
+  color: var(--muted);
+}
+
+/* ---------- ACTIONS ---------- */
+
+.landing-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+
+  flex-wrap: wrap;
+}
+
+.landing-hero-cta {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 0.9rem 1.4rem;
+
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  color: var(--bg);
+  background: var(--text);
+
+  border: 1px solid var(--text);
+
+  text-decoration: none;
+
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal),
+    transform var(--transition-fast);
+}
+
+.landing-hero-cta:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+
+  color: var(--bg);
+
+  transform: translateY(-2px);
+}
+
+.landing-hero-cta:focus-visible,
+.landing-navbar-link:focus-visible,
+.landing-navbar-brand:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 800px) {
+  .landing-navbar {
+    flex-wrap: wrap;
+  }
+
+  .landing-navbar-links {
+    order: 3;
+
+    width: 100%;
+
+    gap: var(--space-md);
+
+    flex-wrap: wrap;
+  }
+
+  .landing-hero {
+    min-height: calc(100vh - 120px);
+
+    padding-block: var(--space-xl);
+  }
+
+  .landing-hero-title {
+    font-size: clamp(3rem, 14vw, 5rem);
+  }
+}
