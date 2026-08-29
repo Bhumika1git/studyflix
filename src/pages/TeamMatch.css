@@ -768,3 +768,56 @@
 
   color: #555;
 }
+
+.teammatch-swipe-card {
+  position: absolute;
+  inset: 0;
+
+  z-index: 5;
+
+  touch-action: pan-y;
+
+  user-select: none;
+
+  transition: transform 0.25s ease;
+}
+
+.teammatch-swipe-card:active {
+  transition: none;
+}
+
+.teammatch-swipe-card:active {
+  transition: none;
+}
+
+.teammatch-swipe-label {
+  position: absolute;
+  top: 25px;
+
+  z-index: 20;
+
+  padding: 8px 14px;
+
+  border: 2px solid;
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.teammatch-pass-label {
+  left: 20px;
+
+  color: #777;
+  transform: rotate(-12deg);
+}
+
+.teammatch-connect-label {
+  right: 20px;
+
+  color: #ed6a3a;
+  transform: rotate(12deg);
+}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./TeamMatch.css";
 import StudentCard from "../components/StudentCard";
 import students from "../data/students";
@@ -8,6 +8,64 @@ function TeamMatch() {
   const [message, setMessage] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSkill, setSelectedSkill] = useState("All");
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragX, setDragX] = useState(0);
+  const [swipeDirection, setSwipeDirection] = useState(null);
+
+  const startX = useRef(0);
+  const handlePointerDown = (e) => {
+  setIsDragging(true);
+  startX.current = e.clientX;
+};
+
+const handlePointerMove = (e) => {
+  if (!isDragging) return;
+
+  const distance = e.clientX - startX.current;
+  setDragX(distance);
+};
+
+const handlePointerUp = () => {
+  if (!isDragging) return;
+
+  setIsDragging(false);
+
+  if (!filteredStudents.length) {
+    setDragX(0);
+    return;
+  }
+
+  const current =
+    filteredStudents[currentStudent % filteredStudents.length];
+
+  if (dragX > 120) {
+    setSwipeDirection("right");
+    setMessage(`Connection request sent to ${current.name}! ❤️`);
+
+    setTimeout(() => {
+      setCurrentStudent(
+        (currentStudent + 1) % filteredStudents.length
+      );
+      setDragX(0);
+      setSwipeDirection(null);
+    }, 250);
+
+  } else if (dragX < -120) {
+    setSwipeDirection("left");
+    setMessage("");
+
+    setTimeout(() => {
+      setCurrentStudent(
+        (currentStudent + 1) % filteredStudents.length
+      );
+      setDragX(0);
+      setSwipeDirection(null);
+    }, 250);
+
+  } else {
+    setDragX(0);
+  }
+};
 
 //   const filteredStudents = students.filter((student) => {
 //   const search = searchTerm.toLowerCase();
@@ -209,7 +267,36 @@ const displayedStudent =
 
             {/* MAIN CARD */}
            {filteredStudents.length > 0 ? (
+  <div
+  className="teammatch-swipe-card"
+  onPointerDown={handlePointerDown}
+  onPointerMove={handlePointerMove}
+  onPointerUp={handlePointerUp}
+  onPointerCancel={handlePointerUp}
+  style={{
+  transform:
+    swipeDirection === "right"
+      ? "translateX(600px) rotate(20deg)"
+      : swipeDirection === "left"
+      ? "translateX(-600px) rotate(-20deg)"
+      : `translateX(${dragX}px) rotate(${dragX * 0.04}deg)`,
+
+  cursor: isDragging ? "grabbing" : "grab"
+}}
+>
+  {dragX < -50 && (
+  <div className="teammatch-swipe-label teammatch-pass-label">
+    PASS
+  </div>
+)}
+
+{dragX > 50 && (
+  <div className="teammatch-swipe-label teammatch-connect-label">
+    CONNECT
+  </div>
+)}
   <StudentCard student={displayedStudent} />
+</div>
 ) : (
   <div className="teammatch-no-results">
     <h3>No students found 😭</h3>
@@ -255,48 +342,6 @@ const displayedStudent =
     {message}
   </p>
 )}
-            {/* ACTION BUTTONS */}
-{/* <div
-  style={{
-    display: "flex",
-    justifyContent: "center",
-    gap: "20px",
-    marginTop: "30px",
-    paddingBottom: "50px",
-    position: "relative",
-    zIndex: 9999
-  }}
->
-  <button
-    style={{
-      padding: "15px 30px",
-      background: "white",
-      border: "2px solid #333",
-      borderRadius: "10px",
-      color: "#333",
-      fontSize: "16px",
-      fontWeight: "bold",
-      cursor: "pointer"
-    }}
-  >
-    ✕ Pass
-  </button>
-
-  <button
-    style={{
-      padding: "15px 30px",
-      background: "#ed6a3a",
-      border: "2px solid #ed6a3a",
-      borderRadius: "10px",
-      color: "white",
-      fontSize: "16px",
-      fontWeight: "bold",
-      cursor: "pointer"
-    }}
-  >
-    ♥ Connect
-  </button>
-</div> */}
         </section>
 
       </main>
