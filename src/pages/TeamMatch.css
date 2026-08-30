@@ -125,11 +125,10 @@
    SEARCH
 ========================= */
 
-.teammatch-search {
+ .teammatch-search {
   width: 610px;
   max-width: 100%;
-
-  height: 50px;
+  height: 52px;
 
   margin: 0 auto 20px;
 
@@ -139,9 +138,43 @@
   background: #ffffff;
 
   border: 1px solid #ddd9d0;
-  border-radius: 10px;
+  border-radius: 12px;
 
   box-sizing: border-box;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.teammatch-search:focus-within {
+  border-color: #ed6a3a;
+  box-shadow: 0 0 0 3px rgba(237, 106, 58, 0.08);
+}
+
+.teammatch-search-icon {
+  margin-left: 17px;
+
+  font-size: 22px;
+  color: #777;
+}
+
+.teammatch-search input {
+  flex: 1;
+
+  min-width: 0;
+  height: 100%;
+
+  padding: 0 15px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  font-size: 14px;
+}
+
+.teammatch-search input::placeholder {
+  color: #999;
 }
 
 .teammatch-search-icon {
@@ -191,11 +224,29 @@
 
   background: #ffffff;
 
+  color: #555;
+
   font-size: 14px;
+  font-weight: 500;
 
   cursor: pointer;
 
-  transition: 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.teammatch-filters button:hover {
+  border-color: #ed6a3a;
+  transform: translateY(-1px);
+}
+
+.teammatch-filter-active {
+  background: #ed6a3a !important;
+  border-color: #ed6a3a !important;
+
+  color: #ffffff !important;
 }
 
 .teammatch-filters button:hover {
@@ -481,29 +532,29 @@
   justify-content: center;
   align-items: center;
 
-  gap: 15px;
+  gap: 16px;
 
-  margin-top: 150px;
+  margin-top: 180px;
   padding-bottom: 30px;
 
   position: relative;
   z-index: 10;
 }
 
-.teammatch-pass-button,
+/* .teammatch-pass-button,
 .teammatch-connect-button {
-  min-width: 130px;
+  min-width: 135px;
 
-  padding: 12px 25px;
+  padding: 13px 25px;
 
-  border-radius: 10px;
+  border-radius: 12px;
 
   font-size: 15px;
   font-weight: 600;
 
   cursor: pointer;
 
-  transition: 0.2s ease;
+  transition: 0.2s ease, box-shadow 0.2s ease;
 }
 
 .teammatch-pass-button {
@@ -524,7 +575,71 @@
 
 .teammatch-pass-button:hover,
 .teammatch-connect-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+} */
+   .teammatch-pass-button,
+.teammatch-connect-button {
+  min-width: 135px;
+
+  padding: 13px 24px;
+
+  border-radius: 12px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+/* PASS */
+
+.teammatch-pass-button {
+  background: #ffffff;
+
+  border: 1px solid #d5d0c7;
+
+  color: #555;
+}
+
+.teammatch-pass-button:hover {
+  background: #f5f2ec;
+
   transform: translateY(-2px);
+
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.07);
+}
+
+
+/* CONNECT */
+
+.teammatch-connect-button {
+  background: #ed6a3a;
+
+  border: 1px solid #ed6a3a;
+
+  color: #ffffff;
+}
+
+.teammatch-connect-button:hover {
+  background: #d95d31;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 7px 16px rgba(237, 106, 58, 0.2);
+}
+
+/* CLICK EFFECT */
+
+.teammatch-pass-button:active,
+.teammatch-connect-button:active {
+  transform: translateY(0);
 }
 
 
@@ -532,7 +647,7 @@
    MOBILE
 ========================= */
 
-@media (max-width: 700px) {
+/* @media (max-width: 700px) {
 
   .teammatch-navbar {
     padding: 0 18px;
@@ -564,6 +679,110 @@
 
   .teammatch-background-right {
     right: -5px;
+  }
+} */
+
+@media (max-width: 700px) {
+
+  .teammatch-navbar {
+    height: 60px;
+    padding: 0 16px;
+  }
+
+  .teammatch-logo {
+    font-size: 20px;
+  }
+
+  .teammatch-nav-links {
+    display: none;
+  }
+
+  .teammatch-nav-icons {
+    gap: 12px;
+    font-size: 18px;
+  }
+
+  .teammatch-content {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 35px 14px 50px;
+  }
+
+  .teammatch-title {
+    font-size: 34px;
+    letter-spacing: -0.5px;
+  }
+
+  .teammatch-description {
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 0 8px;
+  }
+
+  .teammatch-search {
+    width: 100%;
+  }
+
+  .teammatch-filters {
+    gap: 7px;
+  }
+
+  .teammatch-filters button {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .teammatch-students-section {
+    margin-top: 45px;
+  }
+
+  .teammatch-section-title {
+    font-size: 23px;
+  }
+
+  .teammatch-section-description {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .teammatch-funny-text {
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 0 10px;
+  }
+
+  .teammatch-card-deck {
+    width: 100%;
+    max-width: 360px;
+    height: 590px;
+  }
+
+  .teammatch-main-card {
+    width: calc(100% - 20px);
+    left: 10px;
+    padding: 20px;
+  }
+
+  .teammatch-background-card {
+    width: calc(100% - 40px);
+  }
+
+  .teammatch-background-left {
+    left: 0;
+  }
+
+  .teammatch-background-right {
+    right: 0;
+  }
+
+  .teammatch-actions {
+    gap: 10px;
+  }
+
+  .teammatch-pass-button,
+  .teammatch-connect-button {
+    min-width: 120px;
+    padding: 12px 18px;
   }
 }
 
@@ -820,4 +1039,125 @@
 
   color: #ed6a3a;
   transform: rotate(12deg);
+}
+
+/* =========================
+   CARD VISUAL POLISH
+========================= */
+
+.teammatch-main-card {
+  overflow: hidden;
+}
+
+/* Student name */
+
+.teammatch-student-name {
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+/* Student information */
+
+.teammatch-student-info {
+  color: #888;
+  font-size: 12px;
+}
+
+/* Bio */
+
+.teammatch-student-bio {
+  max-width: 280px;
+
+  color: #666;
+
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+/* Skills */
+
+.teammatch-skills span {
+  border: 1px solid #f1d4c4;
+
+  font-weight: 500;
+
+  transition: transform 0.2s ease;
+}
+
+.teammatch-skills span:hover {
+  transform: translateY(-2px);
+}
+
+/* Information boxes */
+
+.teammatch-study-goal,
+.teammatch-study-style,
+.teammatch-preferences,
+.teammatch-looking-for {
+  border: 1px solid #eee9df;
+}
+
+/* Looking for */
+
+.teammatch-looking-for {
+  border-left: 3px solid #ed6a3a;
+}
+
+/* =========================
+   NAVBAR POLISH
+========================= */
+
+.teammatch-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.teammatch-nav-links span {
+  position: relative;
+  padding: 8px 0;
+
+  transition: color 0.2s ease;
+}
+
+.teammatch-nav-links span:hover {
+  color: #ed6a3a;
+}
+
+.teammatch-nav-active::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 2px;
+
+  background: #ed6a3a;
+  border-radius: 2px;
+}
+
+.teammatch-nav-icons span {
+  cursor: pointer;
+
+  transition: transform 0.2s ease;
+}
+
+.teammatch-nav-icons span:hover {
+  transform: translateY(-1px);
+}
+
+.teammatch-profile-circle {
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.teammatch-profile-circle:hover {
+  background: #f3d5c5;
+  transform: scale(1.05);
 }
