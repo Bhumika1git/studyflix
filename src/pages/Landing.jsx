@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
 import "./Landing.css";
 import StudySurface from "../components/StudySurface";
+import AttentionDrift from "../components/AttentionDrift";
+import HowItWorks from "../components/HowItWorks";
 
 /**
  * Landing page — Navbar + Hero only.
@@ -80,6 +82,8 @@ export default function Landing() {
             <StudySurface/>
           </div>
         </section>
+        <AttentionDrift/>
+        <HowItWorks/>
       </main>
     </div>
   );
