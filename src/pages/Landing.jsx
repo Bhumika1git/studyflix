@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
 import "./Landing.css";
+import StudySurface from "../components/StudySurface";
 
 /**
  * Landing page — Navbar + Hero only.
@@ -50,7 +51,8 @@ export default function Landing() {
 
       <main>
         <section className="landing-hero" aria-labelledby="landing-hero-title">
-          <div className="landing-hero-content">
+  <div className="landing-hero-layout">
+    <div className="landing-hero-content">
             <p 
             className="landing-hero-eyebrow">
               For students who are tired of scrolling
@@ -73,7 +75,9 @@ export default function Landing() {
               <p className="landing-hero-note">
                 No streaks to guilt you. No feed to lose an hour to.
               </p>
+              </div>
             </div>
+            <StudySurface/>
           </div>
         </section>
       </main>
