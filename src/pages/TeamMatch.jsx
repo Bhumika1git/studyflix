@@ -257,10 +257,8 @@ const displayedStudent =
 
           {/* CARD DECK */}
           <div className="teammatch-card-deck">
-
             <div className="teammatch-background-card teammatch-background-left">
             </div>
-
             <div className="teammatch-background-card teammatch-background-right">
             </div>
 
