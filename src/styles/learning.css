@@ -1,0 +1,1200 @@
+/* ==========================================================================
+   StudyFlix Learning & Course Experience Stylesheet
+   Matches StudyFlix's minimal, editorial, premium learning platform aesthetic
+   ========================================================================== */
+
+:root {
+  --sf-bg: #faf7f2;
+  --sf-card-bg: #ffffff;
+  --sf-card-border: #e8e3d9;
+  --sf-code-bg: #f2ede4;
+  --sf-primary: #ea580c;
+  --sf-primary-hover: #c2410c;
+  --sf-primary-light: rgba(234, 88, 12, 0.08);
+  --sf-primary-border: rgba(234, 88, 12, 0.25);
+  --sf-success: #10b981;
+  --sf-success-light: rgba(16, 185, 129, 0.1);
+  --sf-muted: #665f59;
+  --sf-heading: #1c1917;
+  --sf-track: #e8e2d8;
+  --sf-radius-sm: 8px;
+  --sf-radius-md: 12px;
+  --sf-radius-lg: 16px;
+  --sf-radius-full: 9999px;
+  --sf-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Container Overrides for StudyFlix Views - Warm Off-White Paper Theme */
+.studyflix-page {
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--sf-bg);
+  color: var(--sf-muted);
+}
+
+/* ==========================================================================
+   Navigation Bar (StudyFlix Minimalist Header)
+   ========================================================================== */
+.sf-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--sf-card-border);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+}
+
+.sf-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--sf-heading);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+}
+
+.sf-brand-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.3);
+}
+
+.sf-brand-tag {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--sf-primary);
+  background: var(--sf-primary-light);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.sf-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sf-nav-link {
+  text-decoration: none;
+  color: var(--sf-muted);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: var(--sf-radius-sm);
+  transition: var(--sf-transition);
+}
+
+.sf-nav-link:hover {
+  color: var(--sf-heading);
+  background: var(--sf-primary-light);
+}
+
+.sf-nav-link.active {
+  color: var(--sf-primary);
+  background: var(--sf-primary-light);
+  font-weight: 600;
+}
+
+.sf-user-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 12px 4px 6px;
+  border-radius: var(--sf-radius-full);
+  background: var(--code-bg, #f4f3ec);
+  border: 1px solid var(--sf-card-border);
+}
+
+.sf-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--sf-radius-full);
+  background: #ea580c;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sf-user-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.sf-user-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sf-heading);
+}
+
+.sf-user-role {
+  font-size: 10px;
+  color: var(--sf-muted);
+}
+
+/* ==========================================================================
+   Page Content Wrapper & Common Typography
+   ========================================================================== */
+.sf-content {
+  padding: 32px 32px 64px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.sf-page-header {
+  margin-bottom: 28px;
+}
+
+.sf-page-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--sf-primary);
+  background: var(--sf-primary-light);
+  border: 1px solid var(--sf-primary-border);
+  padding: 4px 10px;
+  border-radius: var(--sf-radius-full);
+  margin-bottom: 12px;
+}
+
+.sf-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sf-primary);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.sf-page-title {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--sf-heading);
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+.sf-page-subtitle {
+  font-size: 16px;
+  color: var(--sf-muted);
+  max-width: 640px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Quick Stats Bar */
+.sf-stats-bar {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.sf-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--sf-card-bg);
+  border: 1px solid var(--sf-card-border);
+  padding: 10px 16px;
+  border-radius: var(--sf-radius-md);
+  font-size: 13px;
+  color: var(--sf-muted);
+}
+
+.sf-stat-number {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--sf-heading);
+}
+
+/* ==========================================================================
+   FEATURE 4 — CONTINUE LEARNING HERO CARD
+   ========================================================================== */
+.sf-continue-section {
+  margin-bottom: 40px;
+}
+
+.sf-continue-card {
+  background: linear-gradient(135deg, rgba(234, 88, 12, 0.05) 0%, rgba(170, 59, 255, 0.04) 100%), var(--sf-card-bg);
+  border: 1px solid var(--sf-primary-border);
+  border-radius: var(--sf-radius-lg);
+  padding: 28px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 28px;
+  box-shadow: 0 4px 20px -2px rgba(234, 88, 12, 0.08);
+  transition: var(--sf-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.sf-continue-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--sf-primary);
+}
+
+.sf-continue-main {
+  flex: 1;
+}
+
+.sf-continue-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.sf-continue-badge {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: var(--sf-primary);
+  background: var(--sf-primary-light);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.sf-continue-course-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sf-muted);
+}
+
+.sf-continue-episode-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--sf-heading);
+  margin: 0 0 14px;
+  letter-spacing: -0.4px;
+}
+
+.sf-continue-progress-wrap {
+  max-width: 440px;
+}
+
+.sf-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--sf-muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.sf-progress-percent {
+  font-weight: 700;
+  color: var(--sf-primary);
+  font-family: var(--mono);
+}
+
+.sf-progress-track {
+  width: 100%;
+  height: 8px;
+  background: var(--sf-track);
+  border-radius: var(--sf-radius-full);
+  overflow: hidden;
+}
+
+.sf-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ea580c, #f97316);
+  border-radius: var(--sf-radius-full);
+  transition: width 0.4s ease;
+}
+
+.sf-continue-action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.sf-btn-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--sf-primary);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: var(--sf-radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+  transition: var(--sf-transition);
+  white-space: nowrap;
+}
+
+.sf-btn-resume:hover {
+  background: var(--sf-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(234, 88, 12, 0.4);
+}
+
+/* ==========================================================================
+   Filter Pills & Section Headers
+   ========================================================================== */
+.sf-section-header-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.sf-section-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--sf-heading);
+  letter-spacing: -0.4px;
+  margin: 0;
+}
+
+.sf-filter-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sf-pill {
+  padding: 6px 14px;
+  border-radius: var(--sf-radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--sf-card-border);
+  background: var(--sf-card-bg);
+  color: var(--sf-muted);
+  cursor: pointer;
+  transition: var(--sf-transition);
+}
+
+.sf-pill:hover {
+  border-color: var(--sf-primary);
+  color: var(--sf-heading);
+}
+
+.sf-pill.active {
+  background: var(--sf-primary);
+  color: white;
+  border-color: var(--sf-primary);
+}
+
+/* ==========================================================================
+   FEATURE 1 — COURSE CARDS GRID
+   ========================================================================== */
+.sf-courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.sf-course-card {
+  background: var(--sf-card-bg);
+  border: 1px solid var(--sf-card-border);
+  border-radius: var(--sf-radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: var(--sf-transition);
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.sf-course-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--sf-primary-border);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+}
+
+.sf-course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.sf-course-icon-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--sf-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: var(--code-bg, #f4f3ec);
+  border: 1px solid var(--sf-card-border);
+}
+
+.sf-category-chip {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--sf-muted);
+  background: var(--code-bg, #f4f3ec);
+  padding: 4px 10px;
+  border-radius: var(--sf-radius-full);
+}
+
+.sf-course-card-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--sf-heading);
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+
+.sf-course-tagline {
+  font-size: 13px;
+  color: var(--sf-muted);
+  line-height: 1.45;
+  margin: 0 0 18px;
+  flex-grow: 1;
+}
+
+.sf-course-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--sf-muted);
+  margin-bottom: 16px;
+}
+
+.sf-course-meta-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--sf-muted);
+  opacity: 0.5;
+}
+
+.sf-course-card-progress {
+  margin-bottom: 18px;
+}
+
+.sf-course-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--sf-card-border);
+  padding-top: 14px;
+  margin-top: auto;
+}
+
+.sf-course-upnext {
+  font-size: 12px;
+  color: var(--sf-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.sf-btn-view-course {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sf-primary);
+  background: var(--sf-primary-light);
+  padding: 6px 14px;
+  border-radius: var(--sf-radius-sm);
+  text-decoration: none;
+  transition: var(--sf-transition);
+}
+
+.sf-course-card:hover .sf-btn-view-course {
+  background: var(--sf-primary);
+  color: white;
+}
+
+/* Demo Reset Footer */
+.sf-demo-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--code-bg, #f4f3ec);
+  border: 1px solid var(--sf-card-border);
+  border-radius: var(--sf-radius-md);
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--sf-muted);
+}
+
+.sf-btn-reset-demo {
+  background: transparent;
+  border: 1px solid var(--sf-card-border);
+  color: var(--sf-muted);
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: var(--sf-radius-sm);
+  cursor: pointer;
+  transition: var(--sf-transition);
+}
+
+.sf-btn-reset-demo:hover {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+}
+
+/* ==========================================================================
+   FEATURE 2 & 3 & 5 — COURSE PAGE & EPISODE PLAYER
+   ========================================================================== */
+.sf-course-banner {
+  background: var(--sf-card-bg);
+  border-bottom: 1px solid var(--sf-card-border);
+  padding: 24px 32px;
+}
+
+.sf-course-banner-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sf-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--sf-muted);
+  font-size: 13px;
+  font-weight: 500;
+  transition: var(--sf-transition);
+}
+
+.sf-back-link:hover {
+  color: var(--sf-heading);
+}
+
+.sf-course-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--sf-muted);
+}
+
+.sf-course-select {
+  padding: 6px 12px;
+  border-radius: var(--sf-radius-sm);
+  border: 1px solid var(--sf-card-border);
+  background: var(--bg);
+  color: var(--sf-heading);
+  font-size: 13px;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+}
+
+.sf-course-banner-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.sf-course-banner-title {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  color: var(--sf-heading);
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+
+.sf-course-banner-desc {
+  font-size: 15px;
+  color: var(--sf-muted);
+  max-width: 600px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.sf-course-banner-stats {
+  min-width: 240px;
+  background: var(--code-bg, #f4f3ec);
+  padding: 14px 18px;
+  border-radius: var(--sf-radius-md);
+  border: 1px solid var(--sf-card-border);
+}
+
+/* Two-column layout for player and episode syllabus */
+.sf-course-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+/* Interactive Player Viewport */
+.sf-player-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sf-video-viewport {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0f1015;
+  border-radius: var(--sf-radius-lg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #2e303a;
+}
+
+.sf-video-overlay-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#2a2c38 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.4;
+}
+
+.sf-video-screen-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
+
+.sf-play-circle-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(234, 88, 12, 0.95);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(234, 88, 12, 0.5);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: none;
+}
+
+.sf-play-circle-btn:hover {
+  transform: scale(1.1);
+  background: #ea580c;
+}
+
+.sf-video-ep-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fb923c;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.sf-video-ep-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.sf-video-status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px 10px;
+  border-radius: var(--sf-radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sf-video-controls-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 3;
+}
+
+.sf-video-time-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.sf-video-time-progress {
+  height: 100%;
+  background: var(--sf-primary);
+  width: 45%;
+}
+
+.sf-video-control-text {
+  font-size: 12px;
+  color: #e5e7eb;
+  font-family: var(--mono);
+}
+
+/* Episode Detail & Actions */
+.sf-episode-details-card {
+  background: var(--sf-card-bg);
+  border: 1px solid var(--sf-card-border);
+  border-radius: var(--sf-radius-lg);
+  padding: 24px;
+}
+
+.sf-episode-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--sf-card-border);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sf-ep-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sf-ep-num-pill {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--sf-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sf-ep-active-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--sf-heading);
+  margin: 0;
+}
+
+/* FEATURE 5 — MARK COMPLETE BUTTON */
+.sf-btn-mark-complete {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--sf-radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--sf-transition);
+  border: 1px solid transparent;
+}
+
+.sf-btn-mark-complete.action-mark {
+  background: var(--sf-primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
+}
+
+.sf-btn-mark-complete.action-mark:hover {
+  background: var(--sf-primary-hover);
+  transform: translateY(-1px);
+}
+
+.sf-btn-mark-complete.action-completed {
+  background: var(--sf-success-light);
+  color: var(--sf-success);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.sf-btn-mark-complete.action-completed:hover {
+  background: rgba(16, 185, 129, 0.2);
+}
+
+.sf-ep-navigation-row {
+  display: flex;
+  gap: 10px;
+}
+
+.sf-btn-nav-ep {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--sf-radius-sm);
+  background: var(--code-bg, #f4f3ec);
+  border: 1px solid var(--sf-card-border);
+  color: var(--sf-heading);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--sf-transition);
+}
+
+.sf-btn-nav-ep:hover:not(:disabled) {
+  border-color: var(--sf-primary);
+  color: var(--sf-primary);
+}
+
+.sf-btn-nav-ep:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.sf-ep-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--sf-muted);
+  margin: 0 0 16px;
+}
+
+.sf-topics-heading {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+  color: var(--sf-heading);
+  margin-bottom: 8px;
+}
+
+.sf-topics-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sf-topic-pill {
+  font-size: 12px;
+  background: var(--code-bg, #f4f3ec);
+  color: var(--sf-muted);
+  padding: 4px 10px;
+  border-radius: var(--sf-radius-full);
+  border: 1px solid var(--sf-card-border);
+}
+
+/* ==========================================================================
+   FEATURE 3 — EPISODE CARDS & SYLLABUS LIST
+   ========================================================================== */
+.sf-syllabus-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sf-syllabus-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sf-syllabus-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--sf-heading);
+  margin: 0;
+}
+
+.sf-syllabus-count {
+  font-size: 13px;
+  color: var(--sf-muted);
+}
+
+.sf-episodes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Individual Episode Card States */
+.sf-episode-card {
+  background: var(--sf-card-bg);
+  border: 1px solid var(--sf-card-border);
+  border-radius: var(--sf-radius-md);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: var(--sf-transition);
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+}
+
+.sf-episode-card:hover:not(.locked) {
+  border-color: var(--sf-primary-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* State 1: Active / Currently Learning */
+.sf-episode-card.active {
+  border-color: var(--sf-primary);
+  background: var(--sf-primary-light);
+  box-shadow: 0 0 0 1px var(--sf-primary);
+}
+
+/* State 2: Completed */
+.sf-episode-card.completed {
+  background: var(--sf-card-bg);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+/* State 3: Locked */
+.sf-episode-card.locked {
+  opacity: 0.55;
+  background: var(--code-bg, #f4f3ec);
+  cursor: not-allowed;
+}
+
+.sf-ep-number-box {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--sf-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--mono);
+  background: var(--code-bg, #f4f3ec);
+  border: 1px solid var(--sf-card-border);
+  color: var(--sf-heading);
+  flex-shrink: 0;
+}
+
+.sf-episode-card.active .sf-ep-number-box {
+  background: var(--sf-primary);
+  color: white;
+  border-color: var(--sf-primary);
+}
+
+.sf-episode-card.completed .sf-ep-number-box {
+  background: var(--sf-success-light);
+  color: var(--sf-success);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.sf-ep-info-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.sf-ep-card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.sf-ep-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sf-heading);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sf-ep-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--sf-muted);
+}
+
+/* Status Badges */
+.sf-status-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--sf-radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.sf-status-badge.badge-completed {
+  background: var(--sf-success-light);
+  color: var(--sf-success);
+}
+
+.sf-status-badge.badge-learning {
+  background: var(--sf-primary-light);
+  color: var(--sf-primary);
+}
+
+.sf-status-badge.badge-locked {
+  background: var(--sf-card-border);
+  color: var(--sf-muted);
+}
+
+.sf-status-badge.badge-notstarted {
+  background: var(--code-bg, #f4f3ec);
+  color: var(--sf-muted);
+}
+
+.sf-ep-toggle-check-btn {
+  background: transparent;
+  border: 1px solid var(--sf-card-border);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--sf-muted);
+  transition: var(--sf-transition);
+  flex-shrink: 0;
+}
+
+.sf-ep-toggle-check-btn:hover {
+  border-color: var(--sf-primary);
+  color: var(--sf-primary);
+}
+
+.sf-ep-toggle-check-btn.checked {
+  background: var(--sf-success);
+  border-color: var(--sf-success);
+  color: white;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .sf-course-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 20px;
+  }
+  
+  .sf-content {
+    padding: 20px 20px 48px;
+  }
+
+  .sf-continue-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sf-continue-action {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .sf-btn-resume {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .sf-navbar {
+    padding: 12px 16px;
+  }
+
+  .sf-nav-links {
+    display: none; /* Collapsed for compact mobile header */
+  }
+
+  .sf-page-title {
+    font-size: 28px;
+  }
+
+  .sf-continue-episode-title {
+    font-size: 18px;
+  }
+
+  .sf-courses-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sf-course-banner {
+    padding: 16px;
+  }
+
+  .sf-course-banner-title {
+    font-size: 24px;
+  }
+
+  .sf-course-layout {
+    padding: 16px;
+  }
+}

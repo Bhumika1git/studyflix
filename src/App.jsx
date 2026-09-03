@@ -20,6 +20,7 @@ function App() {
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/course" element={<Course />} />
+        <Route path="/course/:courseId" element={<Course />} />
         <Route path="/learning" element={<Learning />} />
         <Route path="/progress" element={<Progress />} />
         <Route path="/teammatch" element={<TeamMatch />} />
