@@ -1,0 +1,176 @@
+
+/* =========================================
+   STUDYFLIX — HOW IT WORKS
+   Component-specific styles only.
+========================================= */
+
+.how-it-works {
+  width: min(
+    var(--content-width),
+    calc(100% - (var(--page-padding) * 2))
+  );
+
+  margin-inline: auto;
+  padding: var(--space-lg) 0;
+
+  color: var(--text);
+}
+
+/* ---------- Heading ---------- */
+
+.how-it-works-heading {
+  max-width: 650px;
+  margin-bottom: 3rem;
+}
+
+.how-it-works-label {
+  display: block;
+
+  margin-bottom: var(--space-md);
+
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: var(--accent);
+}
+
+.how-it-works-heading h2 {
+  margin-bottom: var(--space-md);
+
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 4.8rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+
+.how-it-works-heading p {
+  max-width: 500px;
+
+  font-size: 1rem;
+  line-height: 1.7;
+
+  color: var(--muted);
+}
+
+/* ---------- Process ---------- */
+
+.how-it-works-process {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  border-top: 1px solid color-mix(
+    in srgb,
+    var(--text) 22%,
+    transparent
+  );
+}
+
+/* ---------- Step ---------- */
+
+.how-it-works-step {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-lg);
+
+  min-height: 190px;
+
+  padding: var(--space-lg) var(--space-xl) var(--space-lg) 0;
+
+  border-bottom: 1px solid color-mix(
+    in srgb,
+    var(--text) 22%,
+    transparent
+  );
+
+  transition:
+    transform var(--transition-normal),
+    background-color var(--transition-normal);
+}
+
+.how-it-works-step + .how-it-works-step {
+  padding-left: var(--space-xl);
+
+  border-left: 1px solid color-mix(
+    in srgb,
+    var(--text) 14%,
+    transparent
+  );
+}
+
+/* ---------- Number ---------- */
+
+.how-it-works-number {
+  padding-top: 0.2rem;
+
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+
+  color: var(--accent);
+}
+
+/* ---------- Content ---------- */
+
+.how-it-works-step h3 {
+  margin-bottom: var(--space-sm);
+
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  letter-spacing: 0.12em;
+}
+
+.how-it-works-step p {
+  max-width: 260px;
+
+  font-size: 0.92rem;
+  line-height: 1.7;
+
+  color: var(--muted);
+}
+
+/* ---------- Subtle interaction ---------- */
+
+.how-it-works-step:hover {
+  transform: translateY(-3px);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 800px) {
+  .how-it-works {
+    padding: var(--space-xl) 0;
+  }
+
+  .how-it-works-heading {
+    margin-bottom: var(--space-xl);
+  }
+
+  .how-it-works-process {
+    grid-template-columns: 1fr;
+  }
+
+  .how-it-works-step,
+  .how-it-works-step + .how-it-works-step {
+    min-height: auto;
+
+    padding: var(--space-lg) 0;
+
+    border-left: none;
+    border-bottom: 1px solid color-mix(
+      in srgb,
+      var(--text) 22%,
+      transparent
+    );
+  }
+
+  .how-it-works-step:last-child {
+    border-bottom: none;
+  }
+}

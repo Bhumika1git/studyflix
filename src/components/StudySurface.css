@@ -1,0 +1,85 @@
+.study-surface {
+  width: min(100%, 420px);
+  min-height: 300px;
+  padding: var(--space-lg);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  position: relative;
+  transform: rotate(1.2deg);
+  box-shadow:
+  5px 6px 0 color-mix(in srgb, var(--text) 7%, transparent),
+  0 18px 35px color-mix(in srgb, var(--text) 8%, transparent);
+  align-self: center;
+  transform: rotate(1.2deg) translateY(18px);
+}
+
+.study-surface-header,
+.study-surface-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.study-surface-header {
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 15%, transparent);
+}
+
+.study-surface-body {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-xl) 0;
+}
+
+.study-surface-mark {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.study-surface-kicker {
+  margin: 0 0 var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.study-surface-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.study-surface-footer {
+  padding-top: var(--space-md);
+  border-top: 1px solid color-mix(in srgb, var(--text) 15%, transparent);
+}
+
+.study-surface-progress {
+  flex: 1;
+  height: 2px;
+  background: color-mix(in srgb, var(--text) 15%, transparent);
+}
+
+.study-surface-progress span {
+  display: block;
+  width: 72%;
+  height: 100%;
+  background: var(--accent);
+}
+
+@media (max-width: 800px) {
+  .study-surface {
+    width: 100%;
+    transform: rotate(0.5deg);
+  }
+}

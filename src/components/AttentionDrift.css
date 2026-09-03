@@ -1,0 +1,238 @@
+
+/* =========================================
+   STUDYFLIX — ATTENTION DRIFT
+   Component-specific styles only.
+========================================= */
+
+.attention-drift {
+  position: relative;
+
+  width: min(
+    var(--content-width),
+    calc(100% - (var(--page-padding) * 2))
+  );
+
+  margin-inline: auto;
+  padding: var(--space-xl) 0;
+
+  color: var(--text);
+}
+
+/* ---------- Heading ---------- */
+
+.attention-drift-heading {
+  max-width: 620px;
+  margin-left: 0;
+  margin-bottom: 5rem;
+}
+
+.attention-drift-label {
+  display: block;
+
+  margin-bottom: var(--space-md);
+
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: var(--accent);
+}
+
+.attention-drift-heading h2 {
+  max-width: 600px;
+
+  margin-bottom: var(--space-md);
+
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+
+  font-weight: 400;
+  line-height: 1;
+
+  letter-spacing: -0.02em;
+}
+
+.attention-drift-heading p {
+  max-width: 480px;
+
+  font-size: 1rem;
+  line-height: 1.7;
+
+  color: var(--muted);
+}
+
+/* ---------- Timeline ---------- */
+
+.attention-drift-timeline {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  margin: 0 4%;
+}
+
+/* The line */
+
+.attention-drift-timeline::before {
+  content: "";
+
+  position: absolute;
+
+  top: 1.05rem;
+  left: 0;
+  right: 0;
+
+  height: 1px;
+
+  background: var(--soft-gray);
+}
+
+/* ---------- Timeline Item ---------- */
+
+.attention-drift-item {
+  position: relative;
+
+  padding-right: var(--space-lg);
+}
+
+.attention-drift-item:not(:first-child) {
+  padding-left: var(--space-lg);
+}
+
+/* Timeline dot */
+
+.attention-drift-item::before {
+  content: "";
+
+  position: relative;
+  z-index: 2;
+
+  display: block;
+
+  width: 11px;
+  height: 11px;
+
+  margin-bottom: 1.25rem;
+
+  border: 2px solid var(--bg);
+  border-radius: 50%;
+
+  background: var(--accent);
+}
+
+/* ---------- Time ---------- */
+
+.attention-drift-item span {
+  display: block;
+
+  margin-bottom: var(--space-sm);
+
+  font-family: var(--font-mono);
+  font-size: clamp(1.15rem, 2vw, 1.6rem);
+
+  font-weight: 500;
+  letter-spacing: -0.02em;
+
+  color: var(--text);
+}
+
+/* ---------- Description ---------- */
+
+.attention-drift-item strong {
+  display: block;
+
+  max-width: 190px;
+
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2vw, 2rem);
+
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+/* ---------- Result ---------- */
+
+.attention-drift-result {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+
+  gap: var(--space-md);
+
+  margin-top: 4rem;
+  margin-right: 4%;
+}
+
+.attention-drift-result span {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+
+  letter-spacing: 0.12em;
+
+  color: var(--muted);
+}
+
+.attention-drift-result strong {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+
+  font-weight: 400;
+
+  letter-spacing: -0.03em;
+
+  color: var(--accent);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 800px) {
+  .attention-drift {
+    padding: var(--space-xl) 0;
+  }
+
+  .attention-drift-heading {
+    margin-left: 0;
+    margin-bottom: var(--space-xl);
+  }
+
+  .attention-drift-timeline {
+    grid-template-columns: 1fr;
+
+    margin: 0;
+  }
+
+  .attention-drift-timeline::before {
+    top: 0;
+    bottom: 0;
+    left: 5px;
+
+    width: 1px;
+    height: auto;
+  }
+
+  .attention-drift-item,
+  .attention-drift-item:not(:first-child) {
+    padding: 0 0 3rem 2rem;
+  }
+
+  .attention-drift-item::before {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+  }
+
+  .attention-drift-item strong {
+    max-width: 280px;
+  }
+
+  .attention-drift-result {
+    justify-content: flex-start;
+
+    margin-right: 0;
+    margin-top: 1rem;
+  }
+}
