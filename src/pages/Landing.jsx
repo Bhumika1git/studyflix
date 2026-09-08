@@ -4,9 +4,12 @@ import "./Landing.css";
 import StudySurface from "../components/StudySurface";
 import AttentionDrift from "../components/AttentionDrift";
 import HowItWorks from "../components/HowItWorks";
+import Features from "../components/Features";
+import FinalCta from "../components/FinalCta";
+import LandingFooter from "../components/LandingFooter";
 
 /**
- * Landing page — Navbar + Hero only.
+ * StudyFlix landing page.
  *
  * Naming convention: every page-specific class is prefixed "landing-"
  * (per team convention — see Landing.css header). No shared/generic class
@@ -84,7 +87,10 @@ export default function Landing() {
         </section>
         <AttentionDrift/>
         <HowItWorks/>
+        <Features />
+        <FinalCta />
       </main>
+      <LandingFooter />
     </div>
   );
 }

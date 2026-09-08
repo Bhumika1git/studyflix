@@ -81,13 +81,13 @@
 
   position: absolute;
 
-  top: 1.05rem;
+  top: 10px;
   left: 0;
   right: 0;
 
   height: 1px;
 
-  background: var(--soft-gray);
+  background: color-mix(in srgb, var(--text) 28%, transparent);
 }
 
 /* ---------- Timeline Item ---------- */
@@ -95,11 +95,7 @@
 .attention-drift-item {
   position: relative;
 
-  padding-right: var(--space-lg);
-}
-
-.attention-drift-item:not(:first-child) {
-  padding-left: var(--space-lg);
+  padding: 2rem var(--space-lg) 0 0;
 }
 
 /* Timeline dot */
@@ -107,15 +103,14 @@
 .attention-drift-item::before {
   content: "";
 
-  position: relative;
+  position: absolute;
   z-index: 2;
-
-  display: block;
 
   width: 11px;
   height: 11px;
 
-  margin-bottom: 1.25rem;
+  top: 5px;
+  left: 0;
 
   border: 2px solid var(--bg);
   border-radius: 50%;
@@ -156,6 +151,9 @@
 /* ---------- Result ---------- */
 
 .attention-drift-result {
+  position: relative;
+  z-index: 1;
+
   display: flex;
   align-items: baseline;
   justify-content: flex-end;
@@ -213,8 +211,7 @@
     height: auto;
   }
 
-  .attention-drift-item,
-  .attention-drift-item:not(:first-child) {
+  .attention-drift-item {
     padding: 0 0 3rem 2rem;
   }
 
