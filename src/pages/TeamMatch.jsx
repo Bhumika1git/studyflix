@@ -4,128 +4,235 @@ import StudentCard from "../components/StudentCard";
 import students from "../data/students";
 
 function TeamMatch() {
-    const [currentStudent, setCurrentStudent] = useState(0);
+  const [currentStudent, setCurrentStudent] = useState(0);
   const [message, setMessage] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSkill, setSelectedSkill] = useState("All");
+
   const [isDragging, setIsDragging] = useState(false);
   const [dragX, setDragX] = useState(0);
   const [swipeDirection, setSwipeDirection] = useState(null);
 
   const startX = useRef(0);
+
+  /* FILTER STUDENTS */
+
+  const filteredStudents = students.filter((student) => {
+    const search = searchTerm.toLowerCase();
+
+    const matchesSearch =
+      student.name.toLowerCase().includes(search) ||
+      student.skills.some((skill) =>
+        skill.toLowerCase().includes(search)
+      );
+
+    const matchesSkill =
+      selectedSkill === "All" ||
+      student.skills.includes(selectedSkill);
+
+    return matchesSearch && matchesSkill;
+  });
+
+  /* CURRENT STUDENT */
+
+  const displayedStudent =
+    filteredStudents.length > 0
+      ? filteredStudents[
+          currentStudent % filteredStudents.length
+        ]
+      : null;
+
+  /* START DRAG */
+
   const handlePointerDown = (e) => {
-  setIsDragging(true);
-  startX.current = e.clientX;
-};
+    if (e.button !== 0) return;
 
-const handlePointerMove = (e) => {
-  if (!isDragging) return;
+    startX.current = e.clientX;
+    setIsDragging(true);
 
-  const distance = e.clientX - startX.current;
-  setDragX(distance);
-};
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
 
-const handlePointerUp = () => {
-  if (!isDragging) return;
+  /* MOVE ONLY WHILE CLICKING */
 
-  setIsDragging(false);
+  const handlePointerMove = (e) => {
+    if (!isDragging) return;
 
-  if (!filteredStudents.length) {
-    setDragX(0);
-    return;
-  }
+    const distance = e.clientX - startX.current;
 
-  const current =
-    filteredStudents[currentStudent % filteredStudents.length];
+    setDragX(distance);
+  };
 
-  if (dragX > 120) {
-    setSwipeDirection("right");
-    setMessage(`Connection request sent to ${current.name}! ❤️`);
+  /* FINISH DRAG */
 
-    setTimeout(() => {
-      setCurrentStudent(
-        (currentStudent + 1) % filteredStudents.length
-      );
+  const handlePointerUp = (e) => {
+    if (!isDragging) return;
+
+    setIsDragging(false);
+
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch (error) {
+      // Pointer already released
+    }
+
+    if (!filteredStudents.length) {
       setDragX(0);
-      setSwipeDirection(null);
-    }, 250);
+      return;
+    }
 
-  } else if (dragX < -120) {
-    setSwipeDirection("left");
+    const current =
+      filteredStudents[
+        currentStudent % filteredStudents.length
+      ];
+
+    /* CONNECT */
+
+    if (dragX > 120) {
+      setSwipeDirection("right");
+
+      setMessage(
+        `Connection request sent to ${current.name}! ❤️`
+      );
+
+      setTimeout(() => {
+        setCurrentStudent(
+          (currentStudent + 1) %
+            filteredStudents.length
+        );
+
+        setDragX(0);
+        setSwipeDirection(null);
+      }, 300);
+
+      return;
+    }
+
+    /* PASS */
+
+    if (dragX < -120) {
+      setSwipeDirection("left");
+
+      setMessage("");
+
+      setTimeout(() => {
+        setCurrentStudent(
+          (currentStudent + 1) %
+            filteredStudents.length
+        );
+
+        setDragX(0);
+        setSwipeDirection(null);
+      }, 300);
+
+      return;
+    }
+
+    /* SMALL MOVEMENT */
+
+    setDragX(0);
+  };
+
+  /* CHANGE FILTER */
+
+  const changeSkill = (skill) => {
+    setSelectedSkill(skill);
+    setCurrentStudent(0);
     setMessage("");
-
-    setTimeout(() => {
-      setCurrentStudent(
-        (currentStudent + 1) % filteredStudents.length
-      );
-      setDragX(0);
-      setSwipeDirection(null);
-    }, 250);
-
-  } else {
     setDragX(0);
-  }
-};
+    setSwipeDirection(null);
+  };
 
-//   const filteredStudents = students.filter((student) => {
-//   const search = searchTerm.toLowerCase();
+  /* PASS BUTTON */
 
-//   return (
-//     student.name.toLowerCase().includes(search) ||
-//     student.skills.some((skill) =>
-//       skill.toLowerCase().includes(search)
-//     )
-//   );
-// });
+  const handlePass = () => {
+    if (!filteredStudents.length) return;
 
-const filteredStudents = students.filter((student) => {
-  const search = searchTerm.toLowerCase();
+    setMessage("");
+    setDragX(0);
 
-  const matchesSearch =
-    student.name.toLowerCase().includes(search) ||
-    student.skills.some((skill) =>
-      skill.toLowerCase().includes(search)
+    setCurrentStudent(
+      (currentStudent + 1) %
+        filteredStudents.length
+    );
+  };
+
+  /* CONNECT BUTTON */
+
+  const handleConnect = () => {
+    if (!displayedStudent) return;
+
+    setMessage(
+      `Connection request sent to ${displayedStudent.name}! ❤️`
     );
 
-  const matchesSkill =
-    selectedSkill === "All" ||
-    student.skills.includes(selectedSkill);
+    setCurrentStudent(
+      (currentStudent + 1) %
+        filteredStudents.length
+    );
+  };
 
-  return matchesSearch && matchesSkill;
-});
+  /* PREVIOUS STUDENT */
 
-const displayedStudent =
-  filteredStudents.length > 0
-    ? filteredStudents[currentStudent % filteredStudents.length]
-    : null;
+  const previousStudent =
+    filteredStudents.length > 1
+      ? filteredStudents[
+          (currentStudent - 1 + filteredStudents.length) %
+            filteredStudents.length
+        ]
+      : null;
+
+  /* NEXT STUDENT */
+
+  const nextStudent =
+    filteredStudents.length > 1
+      ? filteredStudents[
+          (currentStudent + 1) %
+            filteredStudents.length
+        ]
+      : null;
+
   return (
     <div className="teammatch-page">
 
-      {/* NAVBAR */}
+      {/* ================= NAVBAR ================= */}
+
       <nav className="teammatch-navbar">
+
         <div className="teammatch-logo">
-          <span>📚</span> StudyFlix
+          <span>📚</span>
+          StudyFlix
         </div>
 
         <div className="teammatch-nav-links">
-          <span>Home</span>
-          <span>My Courses</span>
-          <span>My Projects</span>
-          <span className="teammatch-nav-active">TeamMatch</span>
+          <span>Dashboard</span>
+          <span>Learning</span>
+          <span>Course</span>
+          <span>Progress</span>
+
+          <span className="teammatch-nav-active">
+            TeamMatch
+          </span>
         </div>
 
         <div className="teammatch-nav-icons">
           <span>⌕</span>
           <span>🔔</span>
-          <span className="teammatch-profile-circle">D</span>
+
+          <span className="teammatch-profile-circle">
+            D
+          </span>
         </div>
+
       </nav>
 
 
-      {/* MAIN CONTENT */}
+      {/* ================= MAIN ================= */}
+
       <main className="teammatch-content">
 
-        {/* HERO */}
+        {/* ================= HERO ================= */}
+
         <section className="teammatch-hero">
 
           <p className="teammatch-label">
@@ -143,97 +250,63 @@ const displayedStudent =
 
 
           {/* SEARCH */}
+
           <div className="teammatch-search">
-            <span className="teammatch-search-icon">⌕</span>
+
+            <span className="teammatch-search-icon">
+              ⌕
+            </span>
 
             <input
-  type="text"
-  placeholder="Search students by name or skill..."
-  value={searchTerm}
-  onChange={(e) => setSearchTerm(e.target.value)}
-/>
+              type="text"
+              placeholder="Search students by name or skill..."
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentStudent(0);
+                setMessage("");
+                setDragX(0);
+              }}
+            />
+
           </div>
 
 
           {/* FILTERS */}
+
           <div className="teammatch-filters">
 
-            <button
-  className={selectedSkill === "All" ? "teammatch-filter-active" : ""}
-  onClick={() => {
-    setSelectedSkill("All");
-    setCurrentStudent(0);
-  }}
->
-  All
-</button>
+            {[
+              "All",
+              "Java",
+              "React",
+              "DBMS",
+              "DSA",
+              "Python",
+              "JavaScript"
+            ].map((skill) => (
 
-<button
-  className={selectedSkill === "Java" ? "teammatch-filter-active" : ""}
-  onClick={() => {
-    setSelectedSkill("Java");
-    setCurrentStudent(0);
-  }}
->
-  Java
-</button>
+              <button
+                key={skill}
+                className={
+                  selectedSkill === skill
+                    ? "teammatch-filter-active"
+                    : ""
+                }
+                onClick={() => changeSkill(skill)}
+              >
+                {skill}
+              </button>
 
-<button
-  className={selectedSkill === "React" ? "teammatch-filter-active" : ""}
-  onClick={() => {
-    setSelectedSkill("React");
-    setCurrentStudent(0);
-  }}
->
-  React
-</button>
-
-<button
-  className={selectedSkill === "DBMS" ? "teammatch-filter-active" : ""}
-  onClick={() => {
-    setSelectedSkill("DBMS");
-    setCurrentStudent(0);
-  }}
->
-  DBMS
-</button>
-
-<button
-  className={selectedSkill === "DSA" ? "teammatch-filter-active" : ""}
-  onClick={() => {
-    setSelectedSkill("DSA");
-    setCurrentStudent(0);
-  }}
->
-  DSA
-</button>
-
-<button
-  className={selectedSkill === "Python" ? "teammatch-filter-active" : ""}
-  onClick={() => {
-    setSelectedSkill("Python");
-    setCurrentStudent(0);
-  }}
->
-  Python
-</button>
-
-<button
-  className={selectedSkill === "JavaScript" ? "teammatch-filter-active" : ""}
-  onClick={() => {
-    setSelectedSkill("JavaScript");
-    setCurrentStudent(0);
-  }}
->
-  JavaScript
-</button>
+            ))}
 
           </div>
 
         </section>
 
 
-        {/* TEAMMATES SECTION */}
+        {/* ================= STUDENTS ================= */}
+
         <section className="teammatch-students-section">
 
           <p className="teammatch-section-label">
@@ -255,91 +328,138 @@ const displayedStudent =
           </p>
 
 
-          {/* CARD DECK */}
-          <div className="teammatch-card-deck">
-            <div className="teammatch-background-card teammatch-background-left">
+          {/* ================= CARD DECK ================= */}
+
+          {filteredStudents.length > 0 ? (
+
+            <div className="teammatch-card-deck">
+
+
+              {/* LEFT CARD */}
+
+              <div className="teammatch-side-card teammatch-left-card">
+
+                {previousStudent && (
+                  <StudentCard
+                    student={previousStudent}
+                  />
+                )}
+
+              </div>
+
+
+              {/* CENTER CARD */}
+
+              <div
+                className={`teammatch-swipe-card ${
+                  isDragging
+                    ? "teammatch-is-dragging"
+                    : ""
+                }`}
+                onPointerDown={handlePointerDown}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerUp}
+                onPointerCancel={handlePointerUp}
+                style={{
+                  transform:
+                    swipeDirection === "right"
+                      ? "translateX(650px) rotate(8deg)"
+                      : swipeDirection === "left"
+                      ? "translateX(-650px) rotate(-8deg)"
+                      : `translateX(${dragX}px) rotate(${dragX * 0.025}deg)`
+                }}
+              >
+
+                {/* SWIPE LABEL */}
+
+                {dragX < -50 && (
+                  <div className="teammatch-swipe-label teammatch-pass-label">
+                    PASS
+                  </div>
+                )}
+
+                {dragX > 50 && (
+                  <div className="teammatch-swipe-label teammatch-connect-label">
+                    CONNECT
+                  </div>
+                )}
+
+
+                <StudentCard
+                  student={displayedStudent}
+                />
+
+              </div>
+
+
+              {/* RIGHT CARD */}
+
+              <div className="teammatch-side-card teammatch-right-card">
+
+                {nextStudent && (
+                  <StudentCard
+                    student={nextStudent}
+                  />
+                )}
+
+              </div>
+
             </div>
-            <div className="teammatch-background-card teammatch-background-right">
+
+          ) : (
+
+            <div className="teammatch-no-results">
+
+              <h3>
+                No students found 😭
+              </h3>
+
+              <p>
+                Try another name or skill.
+              </p>
+
             </div>
 
-
-            {/* MAIN CARD */}
-           {filteredStudents.length > 0 ? (
-  <div
-  className="teammatch-swipe-card"
-  onPointerDown={handlePointerDown}
-  onPointerMove={handlePointerMove}
-  onPointerUp={handlePointerUp}
-  onPointerCancel={handlePointerUp}
-  style={{
-  transform:
-    swipeDirection === "right"
-      ? "translateX(600px) rotate(20deg)"
-      : swipeDirection === "left"
-      ? "translateX(-600px) rotate(-20deg)"
-      : `translateX(${dragX}px) rotate(${dragX * 0.04}deg)`,
-
-  cursor: isDragging ? "grabbing" : "grab"
-}}
->
-  {dragX < -50 && (
-  <div className="teammatch-swipe-label teammatch-pass-label">
-    PASS
-  </div>
-)}
-
-{dragX > 50 && (
-  <div className="teammatch-swipe-label teammatch-connect-label">
-    CONNECT
-  </div>
-)}
-  <StudentCard student={displayedStudent} />
-</div>
-) : (
-  <div className="teammatch-no-results">
-    <h3>No students found 😭</h3>
-    <p>Try another name or skill.</p>
-  </div>
-)}
-
-          </div>
+          )}
 
 
-          {/* ACTION BUTTONS */}
-          <div className="teammatch-actions">
+          {/* ================= ACTION BUTTONS ================= */}
 
-           <button
-  className="teammatch-pass-button"
-  onClick={() => {
-    if (!filteredStudents.length) return;
+          {filteredStudents.length > 0 && (
 
-    setMessage("");
+            <div className="teammatch-actions">
 
-    setCurrentStudent(
-      (currentStudent + 1) % filteredStudents.length
-    );
-  }}
->
-  ✕ &nbsp; Pass
-</button>
+              <button
+                className="teammatch-pass-button"
+                onClick={handlePass}
+              >
+                ✕
+                <span>Pass</span>
+              </button>
 
-           <button
-  className="teammatch-connect-button"
-  onClick={() => {
-    setMessage(`Connection request sent to ${displayedStudent?.name}! ❤️`);
-    setCurrentStudent((currentStudent + 1) % students.length);
-  }}
->
-  ♥ &nbsp; Connect
-</button>
+              <button
+                className="teammatch-connect-button"
+                onClick={handleConnect}
+              >
+                ♥
+                <span>Connect</span>
+              </button>
 
-          </div>
+            </div>
 
-{message && (
-  <p className="teammatch-connect-message">
-    {message}
-  </p>
-)}
+          )}
+
+
+          {/* MESSAGE */}
+
+          {message && (
+
+            <p className="teammatch-connect-message">
+              {message}
+            </p>
+
+          )}
+
         </section>
 
       </main>

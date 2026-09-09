@@ -2,7 +2,7 @@ const students = [
   {
     name: "Bhumika",
     course: "CSE",
-    year: "3rd Year",
+    year: "2nd Year",
     university: "Chitkara University",
     bio: "JavaScript lover who enjoys creating clean and useful interfaces.",
     studyGoal: "Build strong frontend projects.",
@@ -17,7 +17,7 @@ const students = [
   {
     name: "Divyansh",
     course: "CSE",
-    year: "3rd Year",
+    year: "2nd Year",
     university: "Chitkara University",
     skills: ["Java", "React", "DBMS"],
     bio: "Frontend enthusiast who enjoys building projects and learning with others.",
@@ -32,7 +32,7 @@ const students = [
   {
     name: "Arnav",
     course: "CSE",
-    year: "3rd Year",
+    year: "2nd Year",
     university: "Chitkara University",
     skills: ["JavaScript", "React", "DSA"],
     nightOwl: "NO",
@@ -47,7 +47,7 @@ const students = [
   {
     name: "Abhirath",
     course: "CSE",
-    year: "3rd Year",
+    year: "2nd Year",
     university: "Chitkara University",
     bio: "Python and DBMS learner looking for a focused study team.",
     studyGoal: "Improve problem solving and database skills.",
@@ -77,7 +77,7 @@ const students = [
   {
     name: "Riya",
     course: "CSE",
-    year: "2nd Year",
+    year: "3rd Year",
     university: "Chitkara University",
     skills: ["React", "JavaScript", "HTML"],
     bio: "Frontend enthusiast who enjoys building projects and learning with others.",
@@ -107,7 +107,7 @@ const students = [
   {
     name: "Simar",
     course: "CSE",
-    year: "2nd Year",
+    year: "3rd Year",
     university: "Chitkara University",
     bio: "JavaScript lover who enjoys creating clean and useful interfaces.",
     studyGoal: "Build strong frontend projects.",
@@ -122,7 +122,7 @@ const students = [
   {
     name: "Harsh",
     course: "CSE",
-    year: "3rd Year",
+    year: "2nd Year",
     university: "Chitkara University",
     skills: ["DSA", "Java", "Python"],
     bio: "Python and DSA learner looking for a focused study team.",
