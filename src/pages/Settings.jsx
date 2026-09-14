@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import StudyFlixLogo from '../components/StudyFlixLogo';
-import ThemeToggle from '../components/ThemeToggle';
+import Navbar from '../components/Navbar';
 import './sharedStyles.css';
 
 const Settings = () => {
@@ -206,15 +205,11 @@ const Settings = () => {
   );
 
   return (
-    <div className="settings-container">
-      
-      {/* Logo */}
-      <StudyFlixLogo className="auth-logo" />
+    <>
+      <Navbar />
 
-      {/* Theme Toggle Button */}
-      <ThemeToggle />
-
-      <div className="settings-layout">
+      <div className="settings-container">
+        <div className="settings-layout">
         
         {/* Sidebar */}
         <div className="settings-sidebar">
@@ -241,8 +236,9 @@ const Settings = () => {
           {activeTab === 'Privacy' && renderPrivacy()}
         </div>
 
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -10,7 +10,8 @@ export default function Navbar() {
     { name: "Learning", path: "/learning" },
     { name: "Course", path: "/course" },
     { name: "TeamMatch", path: "/teammatch" },
-    { name: "Progress", path: "/progress" }
+    { name: "Progress", path: "/progress" },
+    { name: "Settings", path: "/settings" }
   ];
 
   return (
