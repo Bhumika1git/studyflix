@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ThemeToggle from '../components/ThemeToggle';
 import './sharedStyles.css';
 
 const Signup = () => {
@@ -23,7 +24,6 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
-  const [isPaper, setIsPaper] = useState(true);
   const navigate = useNavigate();
 
   // Remove side lines from #root and make it full page size
@@ -96,7 +96,7 @@ const Signup = () => {
   const today = new Date().toISOString().split('T')[0];
 
   return (
-    <div className={`auth-container ${isPaper ? 'paper-bg' : 'screen-bg'}`}>
+    <div className="auth-container">
       
       {/* Logo in top left corner */}
       <div className="logo">
@@ -104,13 +104,7 @@ const Signup = () => {
       </div>
 
       {/* Theme Toggle Button */}
-      <div className="theme-toggle">
-        <span>PAPER</span>
-        <div onClick={() => setIsPaper(!isPaper)} className="theme-toggle-btn">
-          <div className={`theme-toggle-circle ${isPaper ? 'paper' : 'screen'}`}></div>
-        </div>
-        <span>SCREEN</span>
-      </div>
+      <ThemeToggle />
 
       <div className="auth-header">
         <h1 className="auth-title">

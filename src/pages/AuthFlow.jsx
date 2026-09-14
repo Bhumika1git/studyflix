@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ThemeToggle from '../components/ThemeToggle';
 import './sharedStyles.css';
 
 const AuthFlow = () => {
@@ -22,7 +23,6 @@ const AuthFlow = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
-  const [isPaper, setIsPaper] = useState(true);
   const navigate = useNavigate();
 
   // Cascading dropdown data
@@ -227,7 +227,7 @@ const AuthFlow = () => {
   );
 
   return (
-    <div className={`auth-container ${isPaper ? 'paper-bg' : 'screen-bg'}`}>
+    <div className="auth-container">
       
       {/* Logo */}
       <div className="logo">
@@ -235,13 +235,7 @@ const AuthFlow = () => {
       </div>
 
       {/* Theme Toggle Button */}
-      <div className="theme-toggle">
-        <span>PAPER</span>
-        <div onClick={() => setIsPaper(!isPaper)} className="theme-toggle-btn">
-          <div className={`theme-toggle-circle ${isPaper ? 'paper' : 'screen'}`}></div>
-        </div>
-        <span>SCREEN</span>
-      </div>
+      <ThemeToggle />
 
       {!role ? renderRoleSelection() : (view === 'login' ? renderLogin() : renderSignup())}
 

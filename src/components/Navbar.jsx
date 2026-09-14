@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const location = useLocation();
@@ -41,13 +42,7 @@ export default function Navbar() {
         </ul>
       </nav>
 
-      <div className="sf-user-chip">
-        <div className="sf-avatar">A</div>
-        <div className="sf-user-info">
-          <span className="sf-user-name">Arnav</span>
-          <span className="sf-user-role">1st Year CSE</span>
-        </div>
-      </div>
+      <ThemeToggle />
     </header>
   );
 }
