@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './sharedStyles.css';
 
 const AuthFlow = () => {
   const [role, setRole] = useState(null); // 'User', 'Administrator', or null
@@ -31,19 +32,6 @@ const AuthFlow = () => {
     'BCA': ['Software Development', 'Web Design'],
     'B.Sc': ['Physics', 'Mathematics', 'Chemistry']
   };
-
-  // Background styles simulating the Paper/Screen themes
-  const paperBackground = {
-    backgroundColor: '#f6f5f0',
-    backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px)',
-    backgroundSize: '20px 20px',
-  };
-  const screenBackground = {
-    backgroundColor: '#f6f5f0',
-    backgroundImage: 'none',
-  };
-
-  const currentBackground = isPaper ? paperBackground : screenBackground;
 
   useEffect(() => {
     const rootEl = document.getElementById('root');
@@ -122,35 +110,23 @@ const AuthFlow = () => {
 
   const today = new Date().toISOString().split('T')[0];
 
-  const inputStyle = {
-    width: '100%', padding: '12px 14px', borderRadius: '6px', 
-    border: '1px solid #d1d5db', background: '#ffffff', 
-    fontSize: '14px', boxSizing: 'border-box', color: '#333', outline: 'none'
-  };
-
-  const btnStyle = {
-    width: '100%', padding: '14px', borderRadius: '30px', cursor: 'pointer', 
-    border: 'none', background: '#ff5c35', color: '#fff', fontSize: '15px', 
-    fontWeight: '600', transition: 'opacity 0.2s' 
-  };
-
   // --- Render Helpers ---
 
   const renderRoleSelection = () => (
-    <div style={{ textAlign: 'center' }}>
-      <h1 style={{ fontFamily: '"Playfair Display", "Georgia", serif', fontSize: '42px', color: '#08060d', marginBottom: '32px' }}>
+    <div className="role-selection-container">
+      <h1 className="role-selection-title">
         Are you a User or an Administrator?
       </h1>
-      <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
+      <div className="role-selection-buttons">
         <button 
           onClick={() => { setRole('User'); setView('login'); }}
-          style={{ ...btnStyle, maxWidth: '200px', background: '#08060d' }}
+          className="primary-btn btn-max-200 btn-dark"
         >
           User
         </button>
         <button 
           onClick={() => { setRole('Administrator'); setView('login'); }}
-          style={{ ...btnStyle, maxWidth: '200px', background: '#6b6375' }}
+          className="primary-btn btn-max-200 btn-gray"
         >
           Administrator
         </button>
@@ -159,71 +135,71 @@ const AuthFlow = () => {
   );
 
   const renderLogin = () => (
-    <form onSubmit={handleLoginSubmit} style={{ width: '100%', maxWidth: '380px', display: 'flex', flexDirection: 'column', gap: '16px', background: '#fff', padding: '32px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
-      <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-        <h2 style={{ fontFamily: '"Playfair Display", "Georgia", serif', margin: 0, fontSize: '28px', color: '#08060d' }}>{role} Login</h2>
+    <form onSubmit={handleLoginSubmit} className="auth-form login-form">
+      <div className="auth-flow-header">
+        <h2 className="auth-flow-title">{role} Login</h2>
       </div>
 
-      {error && <div style={{ color: '#d93025', textAlign: 'center', fontSize: '13px', padding: '10px', background: '#fce8e6', borderRadius: '6px' }}>{error}</div>}
+      {error && <div className="auth-error">{error}</div>}
       
-      <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required style={inputStyle} />
+      <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required className="form-input" />
       
-      <div style={{ position: 'relative' }}>
-        <input type={showPassword ? "text" : "password"} name="password" placeholder="Password" value={formData.password} onChange={handleChange} required style={inputStyle} />
-        <span onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: '12px', top: '12px', cursor: 'pointer' }}>
+      <div className="password-container">
+        <input type={showPassword ? "text" : "password"} name="password" placeholder="Password" value={formData.password} onChange={handleChange} required className="form-input" />
+        <span onClick={() => setShowPassword(!showPassword)} className="password-toggle">
           {showPassword ? '🙈' : '👁️'}
         </span>
       </div>
 
-      <button type="submit" style={{ ...btnStyle, marginTop: '8px' }}>LOG IN &rarr;</button>
+      <button type="submit" className="primary-btn margin-top-8">LOG IN &rarr;</button>
 
-      <div style={{ textAlign: 'center', marginTop: '8px' }}>
-        <a href="#back" onClick={(e) => { e.preventDefault(); setRole(null); }} style={{ color: '#6b6375', fontSize: '14px', textDecoration: 'none', marginRight: '16px' }}>&larr; Back to Role Selection</a>
+      <div className="auth-footer">
+        <a href="#back" onClick={(e) => { e.preventDefault(); setRole(null); }} className="auth-footer-back-link">&larr; Back to Role Selection</a>
         
         {role === 'User' && (
-          <a href="#signup" onClick={(e) => { e.preventDefault(); setView('signup'); setError(''); }} style={{ color: '#ff5c35', fontSize: '14px', textDecoration: 'none', fontWeight: '500' }}>Sign up</a>
+          <a href="#signup" onClick={(e) => { e.preventDefault(); setView('signup'); setError(''); }} className="auth-footer-link">Sign up</a>
         )}
       </div>
     </form>
   );
 
   const renderSignup = () => (
-    <form onSubmit={handleSignupSubmit} style={{ width: '100%', maxWidth: '500px', display: 'flex', flexDirection: 'column', gap: '16px', background: '#fff', padding: '32px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
-      <div style={{ textAlign: 'center', marginBottom: '8px' }}>
-        <h2 style={{ fontFamily: '"Playfair Display", "Georgia", serif', margin: 0, fontSize: '28px', color: '#08060d' }}>Create User Account</h2>
+    <form onSubmit={handleSignupSubmit} className="auth-form">
+      <div className="auth-flow-signup-header">
+        <h2 className="auth-flow-title">Create User Account</h2>
       </div>
 
-      {error && <div style={{ color: '#d93025', textAlign: 'center', fontSize: '13px', padding: '10px', background: '#fce8e6', borderRadius: '6px' }}>{error}</div>}
+      {error && <div className="auth-error">{error}</div>}
       
-      <div style={{ display: 'flex', gap: '12px' }}>
-        <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} required style={inputStyle} />
-        <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} required style={inputStyle} />
+      <div className="form-row">
+        <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} required className="form-input" />
+        <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} required className="form-input" />
       </div>
       
-      <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required style={inputStyle} />
+      <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required className="form-input" />
       
-      <input type="tel" name="mobile" placeholder="Mobile Number (10 digits)" value={formData.mobile} onChange={handleChange} required maxLength="10" style={inputStyle} />
+      <input type="tel" name="mobile" placeholder="Mobile Number (10 digits)" value={formData.mobile} onChange={handleChange} required maxLength="10" className="form-input" />
 
-      <div style={{ display: 'flex', gap: '12px' }}>
-        <select name="designation" value={formData.designation} onChange={handleChange} required style={{ ...inputStyle, cursor: 'pointer', color: formData.designation ? '#333' : '#999' }}>
+      <div className="form-row">
+        <select name="designation" value={formData.designation} onChange={handleChange} required className="form-input select-input" style={{ color: formData.designation ? '#333' : '#999' }}>
           <option value="" disabled>Select Designation</option>
           <option value="Student">Student</option>
           <option value="Faculty">Faculty</option>
           <option value="Alumni">Alumni</option>
           <option value="Guest">Guest</option>
         </select>
-        <input type="date" name="dob" value={formData.dob} onChange={handleChange} required max={today} style={{ ...inputStyle, color: formData.dob ? '#333' : '#999' }} />
+        <input type="date" name="dob" value={formData.dob} onChange={handleChange} required max={today} className="form-input" style={{ color: formData.dob ? '#333' : '#999' }} />
       </div>
 
-      <div style={{ display: 'flex', gap: '12px' }}>
-        <select name="major" value={formData.major} onChange={handleChange} required style={{ ...inputStyle, cursor: 'pointer', color: formData.major ? '#333' : '#999' }}>
+      <div className="form-row">
+        <select name="major" value={formData.major} onChange={handleChange} required className="form-input select-input" style={{ color: formData.major ? '#333' : '#999' }}>
           <option value="" disabled>Select Major</option>
           {Object.keys(specializationMap).map(major => (
             <option key={major} value={major}>{major}</option>
           ))}
         </select>
 
-        <select name="specialization" value={formData.specialization} onChange={handleChange} disabled={!formData.major} required style={{ ...inputStyle, cursor: formData.major ? 'pointer' : 'not-allowed', background: formData.major ? '#fff' : '#f9f9f9', color: formData.specialization ? '#333' : '#999' }}>
+        <select name="specialization" value={formData.specialization} onChange={handleChange} disabled={!formData.major} required className="form-input select-input" style={{ color: formData.specialization ? '#333' : '#999' }}>
           <option value="" disabled>Select Specialization</option>
           {formData.major && specializationMap[formData.major].map(spec => (
             <option key={spec} value={spec}>{spec}</option>
@@ -231,40 +207,40 @@ const AuthFlow = () => {
         </select>
       </div>
 
-      <div style={{ position: 'relative' }}>
-        <input type={showPassword ? "text" : "password"} name="password" placeholder="Password (Min 8 chars, 1 number, 1 special)" value={formData.password} onChange={handleChange} required style={inputStyle} />
-        <span onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: '12px', top: '12px', cursor: 'pointer' }}>{showPassword ? '🙈' : '👁️'}</span>
+      <div className="password-container">
+        <input type={showPassword ? "text" : "password"} name="password" placeholder="Password (Min 8 chars, 1 number, 1 special)" value={formData.password} onChange={handleChange} required className="form-input" />
+        <span onClick={() => setShowPassword(!showPassword)} className="password-toggle">{showPassword ? '🙈' : '👁️'}</span>
       </div>
 
-      <div style={{ position: 'relative' }}>
-        <input type={showConfirmPassword ? "text" : "password"} name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} required style={inputStyle} />
-        <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} style={{ position: 'absolute', right: '12px', top: '12px', cursor: 'pointer' }}>{showConfirmPassword ? '🙈' : '👁️'}</span>
+      <div className="password-container">
+        <input type={showConfirmPassword ? "text" : "password"} name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} required className="form-input" />
+        <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="password-toggle">{showConfirmPassword ? '🙈' : '👁️'}</span>
       </div>
 
-      <button type="submit" style={{ ...btnStyle, marginTop: '8px' }}>SIGN UP &rarr;</button>
+      <button type="submit" className="primary-btn margin-top-8">SIGN UP &rarr;</button>
 
-      <div style={{ textAlign: 'center', marginTop: '8px' }}>
-        <span style={{ fontSize: '14px', color: '#6b6375' }}>Already have an account? </span>
-        <a href="#login" onClick={(e) => { e.preventDefault(); setView('login'); setError(''); }} style={{ color: '#ff5c35', fontSize: '14px', textDecoration: 'none', fontWeight: '500' }}>Log in</a>
+      <div className="auth-footer">
+        <span className="auth-footer-text">Already have an account? </span>
+        <a href="#login" onClick={(e) => { e.preventDefault(); setView('login'); setError(''); }} className="auth-footer-link">Log in</a>
       </div>
     </form>
   );
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1, padding: '40px 20px', position: 'relative', minHeight: '100vh', ...currentBackground }}>
+    <div className={`auth-container ${isPaper ? 'paper-bg' : 'screen-bg'}`}>
       
       {/* Logo */}
-      <div style={{ position: 'absolute', top: '30px', left: '30px', fontFamily: '"Playfair Display", "Georgia", serif', fontSize: '28px', fontWeight: 'bold', color: '#08060d' }}>
+      <div className="logo">
         StudyFlix
       </div>
 
       {/* Theme Toggle Button */}
-      <div style={{ position: 'absolute', top: '30px', right: '30px', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid #4a4a4a', borderRadius: '24px', padding: '6px 16px', background: 'transparent' }}>
-        <span style={{ fontSize: '13px', letterSpacing: '1px', fontWeight: '500', color: '#333' }}>PAPER</span>
-        <div onClick={() => setIsPaper(!isPaper)} style={{ width: '36px', height: '20px', borderRadius: '10px', border: '1px solid #4a4a4a', position: 'relative', cursor: 'pointer', background: 'transparent' }}>
-          <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#000', position: 'absolute', top: '3px', left: isPaper ? '4px' : '18px', transition: 'left 0.2s ease' }}></div>
+      <div className="theme-toggle">
+        <span>PAPER</span>
+        <div onClick={() => setIsPaper(!isPaper)} className="theme-toggle-btn">
+          <div className={`theme-toggle-circle ${isPaper ? 'paper' : 'screen'}`}></div>
         </div>
-        <span style={{ fontSize: '13px', letterSpacing: '1px', fontWeight: '500', color: '#333' }}>SCREEN</span>
+        <span>SCREEN</span>
       </div>
 
       {!role ? renderRoleSelection() : (view === 'login' ? renderLogin() : renderSignup())}
