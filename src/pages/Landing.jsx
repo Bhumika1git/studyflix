@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
+import StudyFlixLogo from "../components/StudyFlixLogo";
 import "./Landing.css";
 import StudySurface from "../components/StudySurface";
 import AttentionDrift from "../components/AttentionDrift";
@@ -30,9 +31,7 @@ export default function Landing() {
   return (
     <div className="landing-page">
       <header className="landing-navbar">
-        <Link to="/" className="landing-navbar-brand" aria-label="StudyFlix home">
-          Study<span className="landing-navbar-brand-mark">Flix</span>
-        </Link>
+        <StudyFlixLogo className="landing-navbar-brand" />
 
         <nav className="landing-navbar-links" aria-label="Primary">
           <a href="#problem" className="landing-navbar-link">

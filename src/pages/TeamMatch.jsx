@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import "./TeamMatch.css";
 import StudentCard from "../components/StudentCard";
 import students from "../data/students";
+import Navbar from "../components/Navbar";
 
 function TeamMatch() {
   const [currentStudent, setCurrentStudent] = useState(0);
@@ -72,7 +73,7 @@ function TeamMatch() {
 
     try {
       e.currentTarget.releasePointerCapture(e.pointerId);
-    } catch (error) {
+    } catch {
       // Pointer already released
     }
 
@@ -195,36 +196,7 @@ function TeamMatch() {
   return (
     <div className="teammatch-page">
 
-      {/* ================= NAVBAR ================= */}
-
-      <nav className="teammatch-navbar">
-
-        <div className="teammatch-logo">
-          <span>📚</span>
-          StudyFlix
-        </div>
-
-        <div className="teammatch-nav-links">
-          <span>Dashboard</span>
-          <span>Learning</span>
-          <span>Course</span>
-          <span>Progress</span>
-
-          <span className="teammatch-nav-active">
-            TeamMatch
-          </span>
-        </div>
-
-        <div className="teammatch-nav-icons">
-          <span>⌕</span>
-          <span>🔔</span>
-
-          <span className="teammatch-profile-circle">
-            D
-          </span>
-        </div>
-
-      </nav>
+      <Navbar />
 
 
       {/* ================= MAIN ================= */}

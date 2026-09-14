@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ThemeToggle from '../components/ThemeToggle';
+import StudyFlixLogo from '../components/StudyFlixLogo';
 import './sharedStyles.css';
 
 const Signup = () => {
@@ -99,9 +100,7 @@ const Signup = () => {
     <div className="auth-container">
       
       {/* Logo in top left corner */}
-      <div className="logo">
-        StudyFlix
-      </div>
+      <StudyFlixLogo className="auth-logo" />
 
       {/* Theme Toggle Button */}
       <ThemeToggle />

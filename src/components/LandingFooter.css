@@ -22,15 +22,6 @@
   color: var(--text);
 }
 
-.landing-footer-brand {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-}
-
-.landing-footer-brand span {
-  color: var(--accent);
-}
-
 .landing-footer-note,
 .landing-footer-links {
   font-family: var(--font-mono);

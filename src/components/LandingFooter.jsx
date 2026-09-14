@@ -1,12 +1,10 @@
-import { Link } from "react-router-dom";
 import "./LandingFooter.css";
+import StudyFlixLogo from "./StudyFlixLogo";
 
 function LandingFooter() {
   return (
     <footer className="landing-footer">
-      <Link to="/" className="landing-footer-brand" aria-label="StudyFlix home">
-        Study<span>Flix</span>
-      </Link>
+      <StudyFlixLogo className="landing-footer-brand" />
 
       <p className="landing-footer-note">
         A quieter way to learn.

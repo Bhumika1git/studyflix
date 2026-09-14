@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ThemeToggle from '../components/ThemeToggle';
+import StudyFlixLogo from '../components/StudyFlixLogo';
 import './sharedStyles.css';
 
 const AuthFlow = () => {
@@ -230,9 +231,7 @@ const AuthFlow = () => {
     <div className="auth-container">
       
       {/* Logo */}
-      <div className="logo">
-        StudyFlix
-      </div>
+      <StudyFlixLogo className="auth-logo" />
 
       {/* Theme Toggle Button */}
       <ThemeToggle />

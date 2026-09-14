@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import StudyFlixLogo from '../components/StudyFlixLogo';
+import ThemeToggle from '../components/ThemeToggle';
 import './sharedStyles.css';
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState('Profile');
-  const [isPaper, setIsPaper] = useState(true);
 
   useEffect(() => {
     const rootEl = document.getElementById('root');
@@ -205,21 +206,13 @@ const Settings = () => {
   );
 
   return (
-    <div className={`settings-container ${isPaper ? 'paper-bg' : 'screen-bg'}`}>
+    <div className="settings-container">
       
       {/* Logo */}
-      <div className="logo">
-        StudyFlix
-      </div>
+      <StudyFlixLogo className="auth-logo" />
 
       {/* Theme Toggle Button */}
-      <div className="theme-toggle">
-        <span>PAPER</span>
-        <div onClick={() => setIsPaper(!isPaper)} className="theme-toggle-btn">
-          <div className={`theme-toggle-circle ${isPaper ? 'paper' : 'screen'}`}></div>
-        </div>
-        <span>SCREEN</span>
-      </div>
+      <ThemeToggle />
 
       <div className="settings-layout">
         

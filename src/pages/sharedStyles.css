@@ -20,6 +20,7 @@
 
 .settings-container {
   min-height: 100vh;
+  background: transparent;
   padding: 100px 20px 40px;
   font-family: "Segoe UI", Roboto, sans-serif;
   position: relative;
@@ -29,14 +30,10 @@
 }
 
 /* Shared Components */
-.logo {
+.auth-logo {
   position: absolute;
   top: 30px;
   left: 30px;
-  font-family: "Playfair Display", "Georgia", serif;
-  font-size: 28px;
-  font-weight: bold;
-  color: var(--text);
 }
 
 .auth-container > .theme-toggle {
@@ -575,7 +572,7 @@
 }
 
 /* Auth surfaces use the global Paper/Screen material and tokens. */
-.auth-container .logo,
+.auth-container .auth-logo,
 .auth-container .auth-title,
 .auth-container .login-title,
 .auth-container .auth-flow-title,

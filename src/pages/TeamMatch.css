@@ -4,99 +4,10 @@
 
 .teammatch-page {
   min-height: 100vh;
-  background: #f8f6ef;
-  color: #17212b;
-  font-family: Arial, Helvetica, sans-serif;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-body);
 }
-
-/* =====================================================
-   NAVBAR
-===================================================== */
-
-.teammatch-navbar {
-  height: 70px;
-  padding: 0 45px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  background: #ffffff;
-  border-bottom: 1px solid #e7e3da;
-
-  box-sizing: border-box;
-
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-/* LOGO */
-
-.teammatch-logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  /* font-size: 23px; */
-  font-size: 23px;
-  font-weight: 700;
-
-  color: #ed6a3a;
-}
-
-/* NAV LINKS */
-
-.teammatch-nav-links {
-  display: flex;
-  align-items: center;
-  gap: 38px;
-
-  /* font-size: 15px; */
-  font-size: 15px;
-  color: #555b60;
-}
-
-.teammatch-nav-links span {
-  cursor: pointer;
-  padding: 8px 0;
-}
-
-.teammatch-nav-active {
-  color: #ed6a3a !important;
-  font-weight: 700;
-}
-
-/* NAV ICONS */
-
-.teammatch-nav-icons {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-
-  font-size: 21px;
-}
-
-.teammatch-nav-icons span {
-  cursor: pointer;
-}
-
-.teammatch-profile-circle {
-  width: 36px;
-  height: 36px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: #f1e9df;
-
-  font-size: 14px;
-  font-weight: 700;
-}
-
 
 /* =====================================================
    MAIN CONTENT
@@ -951,14 +862,6 @@
 
 @media (max-width: 900px) {
 
-  .teammatch-navbar {
-    padding: 0 20px;
-  }
-
-  .teammatch-nav-links {
-    display: none;
-  }
-
   .teammatch-title {
     font-size: 36px;
   }
@@ -1163,28 +1066,6 @@
    CLASSROOM / SMART BOARD TEXT
 ================================= */
 
-/* NAVBAR */
-
-.teammatch-logo {
-  font-size: 30px;
-}
-
-.teammatch-nav-links {
-  font-size: 21px;
-  gap: 42px;
-}
-
-.teammatch-nav-icons {
-  font-size: 28px;
-}
-
-.teammatch-profile-circle {
-  width: 44px;
-  height: 44px;
-  font-size: 19px;
-}
-
-
 /* TOP LABEL */
 
 .teammatch-label {
@@ -1260,4 +1141,85 @@
 .teammatch-funny-text {
   font-size: 20px;
   line-height: 1.6;
+}
+
+/* StudyFlix material tokens for TeamMatch surfaces and controls. */
+.teammatch-page {
+  background: transparent;
+  color: var(--text);
+}
+
+.teammatch-title,
+.teammatch-section-title,
+.teammatch-student-name {
+  color: var(--text);
+  font-family: var(--font-display);
+}
+
+.teammatch-description,
+.teammatch-section-description,
+.teammatch-student-info,
+.teammatch-student-bio,
+.teammatch-search-icon,
+.teammatch-section-label,
+.teammatch-small-label,
+.teammatch-preferences p,
+.teammatch-study-goal p,
+.teammatch-study-style p,
+.teammatch-looking-for p {
+  color: var(--muted);
+}
+
+.teammatch-label,
+.teammatch-funny-text,
+.teammatch-study-goal span,
+.teammatch-looking-for span,
+.teammatch-avatar {
+  color: var(--accent);
+}
+
+.teammatch-search,
+.teammatch-filters button,
+.teammatch-main-card,
+.teammatch-swipe-label,
+.teammatch-next-card,
+.teammatch-no-results {
+  background: var(--surface);
+  border-color: color-mix(in srgb, var(--text) 20%, transparent);
+  color: var(--text);
+}
+
+.teammatch-search input {
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+.teammatch-search input::placeholder {
+  color: var(--muted);
+}
+
+.teammatch-filters button:hover,
+.teammatch-filter-active,
+.teammatch-pass-button,
+.teammatch-connect-button {
+  border-color: var(--accent) !important;
+  background: var(--accent) !important;
+  color: var(--bg) !important;
+}
+
+.teammatch-skills span,
+.teammatch-study-goal,
+.teammatch-study-style,
+.teammatch-preferences,
+.teammatch-looking-for {
+  background: color-mix(in srgb, var(--surface) 82%, var(--bg));
+  border-color: color-mix(in srgb, var(--text) 16%, transparent);
+}
+
+.teammatch-skills span {
+  color: var(--accent);
+}
+
+.teammatch-study-style span {
+  color: var(--muted);
 }

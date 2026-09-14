@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
+import StudyFlixLogo from "./StudyFlixLogo";
 
 export default function Navbar() {
   const location = useLocation();
@@ -14,11 +15,7 @@ export default function Navbar() {
 
   return (
     <header className="sf-navbar">
-      <Link to="/" className="sf-brand">
-        <div className="sf-brand-icon">S</div>
-        <span>StudyFlix</span>
-        <span className="sf-brand-tag">EDU</span>
-      </Link>
+      <StudyFlixLogo className="sf-brand" />
 
       <nav aria-label="Main Navigation">
         <ul className="sf-nav-links">
