@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ThemeToggle from '../components/ThemeToggle';
 import StudyFlixLogo from '../components/StudyFlixLogo';
@@ -7,7 +7,7 @@ import './sharedStyles.css';
 const AuthFlow = () => {
   const [role, setRole] = useState(null); // 'User', 'Administrator', or null
   const [view, setView] = useState('login'); // 'login' or 'signup'
-  
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -20,7 +20,7 @@ const AuthFlow = () => {
     password: '',
     confirmPassword: ''
   });
-  
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
@@ -34,9 +34,32 @@ const AuthFlow = () => {
     'B.Sc': ['Physics', 'Mathematics', 'Chemistry']
   };
 
+  useEffect(() => {
+    const rootEl = document.getElementById('root');
+    let originalBorder, originalWidth, originalMinHeight;
+
+    if (rootEl) {
+      originalBorder = rootEl.style.borderInline;
+      originalWidth = rootEl.style.width;
+      originalMinHeight = rootEl.style.minHeight;
+
+      rootEl.style.borderInline = 'none';
+      rootEl.style.width = '100%';
+      rootEl.style.minHeight = '100vh';
+    }
+
+    return () => {
+      if (rootEl) {
+        rootEl.style.borderInline = originalBorder;
+        rootEl.style.width = originalWidth;
+        rootEl.style.minHeight = originalMinHeight;
+      }
+    };
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     setFormData(prev => {
       const updated = { ...prev, [name]: value };
       // Reset specialization if major changes
@@ -45,7 +68,7 @@ const AuthFlow = () => {
       }
       return updated;
     });
-    
+
     if (error) setError('');
   };
 
@@ -66,7 +89,7 @@ const AuthFlow = () => {
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
-    
+
     if (formData.mobile.length !== 10 || !/^\d+$/.test(formData.mobile)) {
       setError('Mobile number must be exactly 10 digits.');
       return;
@@ -96,13 +119,13 @@ const AuthFlow = () => {
         Are you a User or an Administrator?
       </h1>
       <div className="role-selection-buttons">
-        <button 
+        <button
           onClick={() => { setRole('User'); setView('login'); }}
           className="primary-btn btn-max-200 btn-dark"
         >
           User
         </button>
-        <button 
+        <button
           onClick={() => { setRole('Administrator'); setView('login'); }}
           className="primary-btn btn-max-200 btn-gray"
         >
@@ -119,9 +142,9 @@ const AuthFlow = () => {
       </div>
 
       {error && <div className="auth-error">{error}</div>}
-      
+
       <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required className="form-input" />
-      
+
       <div className="password-container">
         <input type={showPassword ? "text" : "password"} name="password" placeholder="Password" value={formData.password} onChange={handleChange} required className="form-input" />
         <span onClick={() => setShowPassword(!showPassword)} className="password-toggle">
@@ -133,7 +156,7 @@ const AuthFlow = () => {
 
       <div className="auth-footer">
         <a href="#back" onClick={(e) => { e.preventDefault(); setRole(null); }} className="auth-footer-back-link">&larr; Back to Role Selection</a>
-        
+
         {role === 'User' && (
           <a href="#signup" onClick={(e) => { e.preventDefault(); setView('signup'); setError(''); }} className="auth-footer-link">Sign up</a>
         )}
@@ -148,14 +171,14 @@ const AuthFlow = () => {
       </div>
 
       {error && <div className="auth-error">{error}</div>}
-      
+
       <div className="form-row">
         <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} required className="form-input" />
         <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} required className="form-input" />
       </div>
-      
+
       <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required className="form-input" />
-      
+
       <input type="tel" name="mobile" placeholder="Mobile Number (10 digits)" value={formData.mobile} onChange={handleChange} required maxLength="10" className="form-input" />
 
       <div className="form-row">
@@ -206,17 +229,17 @@ const AuthFlow = () => {
 
   return (
     <div className="auth-container">
-      
-      {/* Logo */}
-      <StudyFlixLogo className="auth-logo" />
 
-      {/* Theme Toggle Button */}
-      <ThemeToggle />
+        {/* Logo */}
+        <StudyFlixLogo className="auth-logo" />
 
-      {!role ? renderRoleSelection() : (view === 'login' ? renderLogin() : renderSignup())}
+        {/* Theme Toggle Button */}
+        <ThemeToggle />
 
-    </div>
-  );
+        {!role ? renderRoleSelection() : (view === 'login' ? renderLogin() : renderSignup())}
+
+      </div>
+      );
 };
 
-export default AuthFlow;
+      export default AuthFlow;
