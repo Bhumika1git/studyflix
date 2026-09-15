@@ -1,32 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
+import Navbar from '../components/Navbar';
 import './sharedStyles.css';
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState('Profile');
-  const [isPaper, setIsPaper] = useState(true);
-
-  useEffect(() => {
-    const rootEl = document.getElementById('root');
-    let originalBorder, originalWidth, originalMinHeight;
-    
-    if (rootEl) {
-      originalBorder = rootEl.style.borderInline;
-      originalWidth = rootEl.style.width;
-      originalMinHeight = rootEl.style.minHeight;
-      
-      rootEl.style.borderInline = 'none';
-      rootEl.style.width = '100%';
-      rootEl.style.minHeight = '100vh';
-    }
-    
-    return () => {
-      if (rootEl) {
-        rootEl.style.borderInline = originalBorder;
-        rootEl.style.width = originalWidth;
-        rootEl.style.minHeight = originalMinHeight;
-      }
-    };
-  }, []);
   
   // Profile State
   const [profile, setProfile] = useState({
@@ -205,51 +182,39 @@ const Settings = () => {
   );
 
   return (
-    <div className={`settings-container ${isPaper ? 'paper-bg' : 'screen-bg'}`}>
-      
-      {/* Logo */}
-      <div className="logo">
-        StudyFlix
-      </div>
+    <>
+      <Navbar />
+      <div className="settings-container">
+        <div className="settings-layout">
+          
+          {/* Sidebar */}
+          <div className="settings-sidebar">
+            <h1 className="settings-sidebar-title">Settings</h1>
+            <ul className="settings-nav">
+              {tabs.map(tab => (
+                <li 
+                  key={tab} 
+                  onClick={() => setActiveTab(tab)}
+                  className={`settings-nav-item ${activeTab === tab ? 'active' : ''}`}
+                >
+                  {tab}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-      {/* Theme Toggle Button */}
-      <div className="theme-toggle">
-        <span>PAPER</span>
-        <div onClick={() => setIsPaper(!isPaper)} className="theme-toggle-btn">
-          <div className={`theme-toggle-circle ${isPaper ? 'paper' : 'screen'}`}></div>
+          {/* Content Area */}
+          <div className="settings-content">
+            {activeTab === 'Profile' && renderProfile()}
+            {activeTab === 'Security' && renderSecurity()}
+            {activeTab === 'Appearance' && renderAppearance()}
+            {activeTab === 'Notifications' && renderNotifications()}
+            {activeTab === 'Privacy' && renderPrivacy()}
+          </div>
+
         </div>
-        <span>SCREEN</span>
       </div>
-
-      <div className="settings-layout">
-        
-        {/* Sidebar */}
-        <div className="settings-sidebar">
-          <h1 className="settings-sidebar-title">Settings</h1>
-          <ul className="settings-nav">
-            {tabs.map(tab => (
-              <li 
-                key={tab} 
-                onClick={() => setActiveTab(tab)}
-                className={`settings-nav-item ${activeTab === tab ? 'active' : ''}`}
-              >
-                {tab}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Content Area */}
-        <div className="settings-content">
-          {activeTab === 'Profile' && renderProfile()}
-          {activeTab === 'Security' && renderSecurity()}
-          {activeTab === 'Appearance' && renderAppearance()}
-          {activeTab === 'Notifications' && renderNotifications()}
-          {activeTab === 'Privacy' && renderPrivacy()}
-        </div>
-
-      </div>
-    </div>
+    </>
   );
 };
 

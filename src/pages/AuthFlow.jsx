@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ThemeToggle from '../components/ThemeToggle';
+import StudyFlixLogo from '../components/StudyFlixLogo';
 import './sharedStyles.css';
 
 const AuthFlow = () => {
@@ -22,7 +24,6 @@ const AuthFlow = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
-  const [isPaper, setIsPaper] = useState(true);
   const navigate = useNavigate();
 
   // Cascading dropdown data
@@ -32,29 +33,6 @@ const AuthFlow = () => {
     'BCA': ['Software Development', 'Web Design'],
     'B.Sc': ['Physics', 'Mathematics', 'Chemistry']
   };
-
-  useEffect(() => {
-    const rootEl = document.getElementById('root');
-    let originalBorder, originalWidth, originalMinHeight;
-    
-    if (rootEl) {
-      originalBorder = rootEl.style.borderInline;
-      originalWidth = rootEl.style.width;
-      originalMinHeight = rootEl.style.minHeight;
-      
-      rootEl.style.borderInline = 'none';
-      rootEl.style.width = '100%';
-      rootEl.style.minHeight = '100vh';
-    }
-    
-    return () => {
-      if (rootEl) {
-        rootEl.style.borderInline = originalBorder;
-        rootEl.style.width = originalWidth;
-        rootEl.style.minHeight = originalMinHeight;
-      }
-    };
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -227,21 +205,13 @@ const AuthFlow = () => {
   );
 
   return (
-    <div className={`auth-container ${isPaper ? 'paper-bg' : 'screen-bg'}`}>
+    <div className="auth-container">
       
       {/* Logo */}
-      <div className="logo">
-        StudyFlix
-      </div>
+      <StudyFlixLogo className="auth-logo" />
 
       {/* Theme Toggle Button */}
-      <div className="theme-toggle">
-        <span>PAPER</span>
-        <div onClick={() => setIsPaper(!isPaper)} className="theme-toggle-btn">
-          <div className={`theme-toggle-circle ${isPaper ? 'paper' : 'screen'}`}></div>
-        </div>
-        <span>SCREEN</span>
-      </div>
+      <ThemeToggle />
 
       {!role ? renderRoleSelection() : (view === 'login' ? renderLogin() : renderSignup())}
 

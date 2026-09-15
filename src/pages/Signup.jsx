@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ThemeToggle from '../components/ThemeToggle';
+import StudyFlixLogo from '../components/StudyFlixLogo';
 import './sharedStyles.css';
 
 const Signup = () => {
@@ -23,32 +25,7 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
-  const [isPaper, setIsPaper] = useState(true);
   const navigate = useNavigate();
-
-  // Remove side lines from #root and make it full page size
-  useEffect(() => {
-    const rootEl = document.getElementById('root');
-    let originalBorder, originalWidth, originalMinHeight;
-    
-    if (rootEl) {
-      originalBorder = rootEl.style.borderInline;
-      originalWidth = rootEl.style.width;
-      originalMinHeight = rootEl.style.minHeight;
-      
-      rootEl.style.borderInline = 'none';
-      rootEl.style.width = '100%';
-      rootEl.style.minHeight = '100vh';
-    }
-    
-    return () => {
-      if (rootEl) {
-        rootEl.style.borderInline = originalBorder;
-        rootEl.style.width = originalWidth;
-        rootEl.style.minHeight = originalMinHeight;
-      }
-    };
-  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -96,21 +73,13 @@ const Signup = () => {
   const today = new Date().toISOString().split('T')[0];
 
   return (
-    <div className={`auth-container ${isPaper ? 'paper-bg' : 'screen-bg'}`}>
+    <div className="auth-container">
       
       {/* Logo in top left corner */}
-      <div className="logo">
-        StudyFlix
-      </div>
+      <StudyFlixLogo className="auth-logo" />
 
       {/* Theme Toggle Button */}
-      <div className="theme-toggle">
-        <span>PAPER</span>
-        <div onClick={() => setIsPaper(!isPaper)} className="theme-toggle-btn">
-          <div className={`theme-toggle-circle ${isPaper ? 'paper' : 'screen'}`}></div>
-        </div>
-        <span>SCREEN</span>
-      </div>
+      <ThemeToggle />
 
       <div className="auth-header">
         <h1 className="auth-title">

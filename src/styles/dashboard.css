@@ -1,0 +1,125 @@
+.dashboard-page {
+  min-height: 100vh;
+}
+
+.dashboard-content {
+  width: min(var(--content-width), calc(100% - (var(--page-padding) * 2)));
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 7rem) 0;
+}
+
+.dashboard-intro {
+  max-width: 44rem;
+  margin-bottom: clamp(3rem, 7vw, 6rem);
+}
+
+.dashboard-kicker {
+  margin-bottom: 0.75rem;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dashboard-intro h1,
+.dashboard-section-heading h2 {
+  color: var(--text);
+}
+
+.dashboard-intro h1 {
+  margin-bottom: 1rem;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1;
+}
+
+.dashboard-intro > p:last-child {
+  max-width: 36rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.dashboard-section-heading {
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-section-heading h2 {
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+}
+
+.dashboard-module-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.dashboard-module-card {
+  display: flex;
+  min-height: 13rem;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--text) 22%, transparent);
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.dashboard-module-card:hover,
+.dashboard-module-card:focus-visible {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--surface) 88%, var(--accent));
+}
+
+.dashboard-module-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.dashboard-module-arrow {
+  align-self: flex-end;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+}
+
+.dashboard-module-card h3 {
+  margin-top: auto;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 400;
+}
+
+.dashboard-module-card p {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.dashboard-module-link {
+  margin-top: 1.5rem;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .dashboard-module-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .dashboard-content {
+    width: min(100% - 2rem, var(--content-width));
+    padding: 3rem 0;
+  }
+
+  .dashboard-module-grid {
+    grid-template-columns: 1fr;
+  }
+}
