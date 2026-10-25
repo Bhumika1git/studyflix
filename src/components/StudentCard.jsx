@@ -1,4 +1,4 @@
-function StudentCard({ student }) {
+function StudentCard({ student, onMessage }) {
   return (
     <div className="teammatch-main-card">
 
@@ -135,6 +135,18 @@ function StudentCard({ student }) {
         </p>
 
       </div>
+
+      {/* MESSAGE BUTTON */}
+
+      {onMessage && (
+        <button
+          className="teammatch-message-button"
+          onPointerDown={(e) => e.stopPropagation()}
+          onClick={() => onMessage(student)}
+        >
+          💬 Message
+        </button>
+      )}
 
     </div>
   );
