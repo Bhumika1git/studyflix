@@ -1,4 +1,4 @@
-/* =====================================================
+﻿/* =====================================================
    TEAMMATCH PAGE
 ===================================================== */
 
@@ -1260,8 +1260,6 @@
 .teammatch-funny-text {
   font-size: 20px;
   line-height: 1.6;
-<<<<<<< Updated upstream
-=======
 }
 
 /* StudyFlix material tokens for TeamMatch surfaces and controls. */
@@ -1638,5 +1636,4 @@
 .teammatch-preferences strong {
   color: #ed6a3a;
   font-weight: 700;
->>>>>>> Stashed changes
 }
