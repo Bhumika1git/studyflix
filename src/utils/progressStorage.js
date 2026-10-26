@@ -1,31 +1,31 @@
-import { getCourseById } from "../data/coursesData";
+import { getCourseById, COURSES } from "../data/coursesData";
 
 const STORAGE_KEY = "studyflix_learning_progress_v1";
 
 // Initial demo state matching the project requirements
 const DEFAULT_INITIAL_STATE = {
   lastActiveCourseId: "java-programming",
-  lastActiveEpisodeId: "java-ep-3",
+  lastActiveOptionId: "java-best-overall",
   courses: {
     "java-programming": {
-      completedEpisodes: ["java-ep-1", "java-ep-2"],
-      lastEpisodeId: "java-ep-3"
+      completedEpisodes: ["java-mod-1", "java-mod-2"],
+      progressPercent: 35
     },
     "react-development": {
-      completedEpisodes: ["react-ep-1"],
-      lastEpisodeId: "react-ep-2"
+      completedEpisodes: ["react-mod-1"],
+      progressPercent: 20
     },
     "python-essentials": {
       completedEpisodes: [],
-      lastEpisodeId: "py-ep-1"
+      progressPercent: 0
     },
     "dsa": {
       completedEpisodes: [],
-      lastEpisodeId: "dsa-ep-1"
+      progressPercent: 0
     },
     "dbms": {
       completedEpisodes: [],
-      lastEpisodeId: "db-ep-1"
+      progressPercent: 0
     }
   }
 };
@@ -41,7 +41,6 @@ export function loadProgress() {
       return DEFAULT_INITIAL_STATE;
     }
     const parsed = JSON.parse(raw);
-    // Ensure all known courses exist in parsed state
     const merged = { ...DEFAULT_INITIAL_STATE, ...parsed };
     merged.courses = { ...DEFAULT_INITIAL_STATE.courses, ...(parsed.courses || {}) };
     return merged;
@@ -66,56 +65,53 @@ export function saveProgress(state) {
  * Calculates percentage completion for a given course.
  */
 export function getCourseProgressPercentage(course, completedIds = []) {
-  if (!course || !course.episodes || course.episodes.length === 0) return 0;
+  if (!course) return 0;
+  const mods = course.modules || course.episodes || [];
+  if (!mods.length) return 0;
   const validCompleted = completedIds.filter((id) =>
-    course.episodes.some((ep) => ep.id === id)
+    mods.some((ep) => ep.id === id)
   );
-  return Math.round((validCompleted.length / course.episodes.length) * 100);
+  return Math.round((validCompleted.length / mods.length) * 100);
 }
 
 /**
- * Checks if an episode at index `index` is locked.
- * Sequential logic:
- * - Episode 0 (Episode 1) is always unlocked.
- * - Episode `i` is unlocked if Episode `i - 1` is completed.
+ * Checks if an episode/module at index `index` is locked.
  */
 export function isEpisodeLocked(course, episodeIndex, completedIds = []) {
   if (episodeIndex === 0) return false;
-  const previousEpisode = course.episodes[episodeIndex - 1];
+  const mods = course.modules || course.episodes || [];
+  const previousEpisode = mods[episodeIndex - 1];
   if (!previousEpisode) return false;
   return !completedIds.includes(previousEpisode.id);
 }
 
 /**
  * Finds the currently active episode for a course.
- * Defaults to the first incomplete and unlocked episode.
  */
 export function getCurrentEpisodeForCourse(course, courseProgress) {
-  if (!course || !course.episodes.length) return null;
+  if (!course) return null;
+  const mods = course.modules || course.episodes || [];
+  if (!mods.length) return null;
   const completed = courseProgress?.completedEpisodes || [];
-  
-  // If user previously viewed a specific episode and it's unlocked, use it
+
   if (courseProgress?.lastEpisodeId) {
-    const epIndex = course.episodes.findIndex((e) => e.id === courseProgress.lastEpisodeId);
+    const epIndex = mods.findIndex((e) => e.id === courseProgress.lastEpisodeId);
     if (epIndex !== -1 && !isEpisodeLocked(course, epIndex, completed)) {
-      return course.episodes[epIndex];
+      return mods[epIndex];
     }
   }
 
-  // Otherwise, find the first incomplete unlocked episode
-  for (let i = 0; i < course.episodes.length; i++) {
-    if (!completed.includes(course.episodes[i].id)) {
-      return course.episodes[i];
+  for (let i = 0; i < mods.length; i++) {
+    if (!completed.includes(mods[i].id)) {
+      return mods[i];
     }
   }
 
-  // If all completed, return the last episode
-  return course.episodes[course.episodes.length - 1];
+  return mods[mods.length - 1];
 }
 
 /**
- * Marks an episode as completed or toggles its state.
- * Returns the fresh updated progress state.
+ * Toggles completion of an episode / module.
  */
 export function toggleEpisodeCompletion(courseId, episodeId) {
   const current = loadProgress();
@@ -127,19 +123,17 @@ export function toggleEpisodeCompletion(courseId, episodeId) {
 
   let updatedCompleted;
   if (alreadyCompleted) {
-    // Unmark complete
     updatedCompleted = courseData.completedEpisodes.filter((id) => id !== episodeId);
   } else {
-    // Mark complete
     updatedCompleted = [...courseData.completedEpisodes, episodeId];
   }
 
-  // Find next episode to advance to if we just completed
+  const mods = course.modules || course.episodes || [];
   let nextActiveEpisodeId = episodeId;
   if (!alreadyCompleted) {
-    const currentIndex = course.episodes.findIndex((e) => e.id === episodeId);
-    if (currentIndex !== -1 && currentIndex + 1 < course.episodes.length) {
-      nextActiveEpisodeId = course.episodes[currentIndex + 1].id;
+    const currentIndex = mods.findIndex((e) => e.id === episodeId);
+    if (currentIndex !== -1 && currentIndex + 1 < mods.length) {
+      nextActiveEpisodeId = mods[currentIndex + 1].id;
     }
   }
 
@@ -161,7 +155,7 @@ export function toggleEpisodeCompletion(courseId, episodeId) {
 }
 
 /**
- * Updates the user's active course and active episode when navigating or playing.
+ * Updates the user's active course.
  */
 export function setActiveEpisode(courseId, episodeId) {
   const current = loadProgress();
@@ -185,23 +179,53 @@ export function setActiveEpisode(courseId, episodeId) {
 }
 
 /**
+ * Reads syllabus checklist progress for a course from localStorage.
+ */
+export function getCourseSyllabusProgress(courseId) {
+  try {
+    const raw = localStorage.getItem(`studyflix_syllabus_${courseId}`);
+    const checkedMap = raw ? JSON.parse(raw) : {};
+    const course = getCourseById(courseId);
+    if (!course || !course.modules) return { completed: 0, total: 0, percent: 0 };
+    let total = 0;
+    let completed = 0;
+    course.modules.forEach((mod) => {
+      (mod.topics || []).forEach((topic) => {
+        total += 1;
+        if (checkedMap[`${mod.id}-${topic}`]) {
+          completed += 1;
+        }
+      });
+    });
+    const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+    return { completed, total, percent };
+  } catch {
+    return { completed: 0, total: 0, percent: 0 };
+  }
+}
+
+/**
  * Retrieves data for the "Continue Learning" banner on the Learning dashboard.
  */
 export function getContinueLearningData(progressState) {
   const state = progressState || loadProgress();
   const activeCourseId = state.lastActiveCourseId || "java-programming";
   const course = getCourseById(activeCourseId);
-  const courseData = state.courses[activeCourseId] || { completedEpisodes: [], lastEpisodeId: null };
+  const syllabusProgress = getCourseSyllabusProgress(activeCourseId);
 
-  const currentEpisode = getCurrentEpisodeForCourse(course, courseData);
-  const progressPercent = getCourseProgressPercentage(course, courseData.completedEpisodes);
+  const courseData = state.courses[activeCourseId] || { completedEpisodes: [] };
+  const fallbackPercent = getCourseProgressPercentage(course, courseData.completedEpisodes);
+  const progressPercent =
+    syllabusProgress.total > 0 && syllabusProgress.completed > 0
+      ? syllabusProgress.percent
+      : fallbackPercent;
 
   return {
     course,
-    episode: currentEpisode || course.episodes[0],
     progressPercent,
-    completedCount: courseData.completedEpisodes.length,
-    totalEpisodes: course.episodes.length
+    completedTopics: syllabusProgress.completed,
+    totalTopics: syllabusProgress.total || 24,
+    activeTrack: course.videoOptions?.[0]?.badge || "🎯 Best Overall Track"
   };
 }
 
@@ -210,5 +234,12 @@ export function getContinueLearningData(progressState) {
  */
 export function resetAllProgress() {
   saveProgress(DEFAULT_INITIAL_STATE);
+  COURSES.forEach((c) => {
+    try {
+      localStorage.removeItem(`studyflix_syllabus_${c.id}`);
+    } catch (e) {
+      console.error(e);
+    }
+  });
   return DEFAULT_INITIAL_STATE;
 }

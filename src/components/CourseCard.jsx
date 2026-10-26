@@ -2,17 +2,18 @@ import { Link } from "react-router-dom";
 
 export default function CourseCard({
   course,
-  completedEpisodes = [],
-  progressPercent = 0,
-  upNextEpisode
+  progressPercent = 0
 }) {
   const isCompleted = progressPercent === 100;
   const buttonLabel =
     progressPercent > 0
       ? isCompleted
         ? "Review Course"
-        : "Continue"
+        : "Continue Course"
       : "Start Course";
+
+  const tracksCount = course.videoOptions?.length || 3;
+  const modulesCount = course.modules?.length || 6;
 
   return (
     <div className="sf-course-card">
@@ -34,7 +35,7 @@ export default function CourseCard({
       <p className="sf-course-tagline">{course.tagline}</p>
 
       <div className="sf-course-meta-row">
-        <span>{course.episodes.length} Episodes</span>
+        <span>{tracksCount} Curated Tracks</span>
         <span className="sf-course-meta-dot"></span>
         <span>{course.totalDuration}</span>
         <span className="sf-course-meta-dot"></span>
@@ -43,9 +44,7 @@ export default function CourseCard({
 
       <div className="sf-course-card-progress">
         <div className="sf-progress-header">
-          <span>
-            {completedEpisodes.length} of {course.episodes.length} completed
-          </span>
+          <span>{modulesCount} Syllabus Modules</span>
           <span className="sf-progress-percent">{progressPercent}%</span>
         </div>
 
@@ -63,17 +62,14 @@ export default function CourseCard({
       </div>
 
       <div className="sf-course-footer">
-        <div
-          className="sf-course-upnext"
-          title={upNextEpisode ? `Up next: ${upNextEpisode.title}` : ""}
-        >
+        <div className="sf-course-upnext">
           {isCompleted ? (
             <span style={{ color: "var(--sf-success)", fontWeight: 600 }}>
               🎉 Course Completed!
             </span>
-          ) : upNextEpisode ? (
+          ) : progressPercent > 0 ? (
             <span>
-              Next: <strong>{upNextEpisode.title}</strong>
+              In Progress • <strong>{course.videoOptions?.[0]?.label || "Best Overall"}</strong>
             </span>
           ) : (
             <span>Ready to begin</span>
