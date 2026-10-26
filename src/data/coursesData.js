@@ -155,7 +155,7 @@ export const COURSES = [
         chaptersCount: 36,
         hasTimestamps: true,
         description:
-          "Comprehensive deep-dive covering modern React components, JSX, hooks, state management, routing, and deployment with 36 structured chapters."
+          "Comprehensive deep-dive covering React components, Form handling with validation strategies, Reusable input components, Context API & State architecture in React apps, Global vs local state, Intro to Redux Toolkit or Zustand, Async state & loading/error handling, and a Mini project: shopping cart or dashboard."
       },
       {
         id: "react-beginner-friendly",
@@ -174,7 +174,7 @@ export const COURSES = [
         chaptersCount: 16,
         hasTimestamps: false,
         description:
-          "Step-by-step visual explanation with gentle learning curve covering React components, props, state, and event handling."
+          "Step-by-step visual explanation with gentle learning curve covering React components, props, state, form handling, and event handling."
       },
       {
         id: "react-hands-on-coding",
@@ -193,7 +193,7 @@ export const COURSES = [
         chaptersCount: 22,
         hasTimestamps: false,
         description:
-          "Practical, project-driven, live code-along approach building full stack web applications with custom hooks and state management."
+          "Practical, project-driven, live code-along approach building a Mini project: shopping cart or dashboard using Context API, Reusable input components, and Async state flows."
       }
     ],
     modules: [
@@ -208,7 +208,7 @@ export const COURSES = [
       {
         id: "react-mod-2",
         number: 2,
-        title: "Props & State Management with useState",
+        title: "Props, Local State & Event Handling",
         duration: "18 min",
         description: "Pass data down with props and make interfaces interactive using React's useState hook.",
         topics: ["Props Passing", "useState Hook", "State Immutability", "Event Handling"]
@@ -216,34 +216,34 @@ export const COURSES = [
       {
         id: "react-mod-3",
         number: 3,
-        title: "Side Effects with useEffect & API Calls",
+        title: "Side Effects & Async State Handling",
         duration: "20 min",
-        description: "Handle side effects, lifecycle events, cleanup functions, and fetching mock APIs.",
-        topics: ["useEffect Hook", "Dependency Array", "Cleanup Functions", "Async Fetching"]
+        description: "Handle side effects, lifecycle events, cleanup functions, and manage async state with loading/error handling.",
+        topics: ["useEffect Hook", "Dependency Array", "Async state and loading/error handling", "Cleanup Functions"]
       },
       {
         id: "react-mod-4",
         number: 4,
-        title: "Lists, Keys & Conditional Rendering",
-        duration: "16 min",
-        description: "Render dynamic collections safely using map(), unique keys, and conditional operators.",
-        topics: ["Array Mapping", "Key Prop Significance", "Ternary Rendering", "Short-Circuiting"]
+        title: "Form Handling in React",
+        duration: "22 min",
+        description: "Build robust forms in React, integrate client-side validation strategies, and create reusable input components.",
+        topics: ["Form handling in React", "Validation strategies", "Reusable input components", "Controlled Components"]
       },
       {
         id: "react-mod-5",
         number: 5,
-        title: "Routing with React Router v7",
-        duration: "22 min",
-        description: "Create single page application navigation with BrowserRouter, Routes, Route, and useParams.",
-        topics: ["Route Definitions", "useNavigate", "useParams", "Active Links"]
+        title: "Context API & State Architecture",
+        duration: "26 min",
+        description: "Design clean state architecture, balance global vs local state, explore Redux Toolkit/Zustand, and build Context providers.",
+        topics: ["Context API", "State architecture in React apps", "Global vs local state", "Intro to Redux Toolkit or Zustand"]
       },
       {
         id: "react-mod-6",
         number: 6,
-        title: "Building Component Systems & LocalStorage",
-        duration: "20 min",
-        description: "Organize reusable UI components, clean styling patterns, and persist state in localStorage.",
-        topics: ["Custom Hooks", "localStorage Sync", "UI Component Libraries", "Performance"]
+        title: "Mini Project & Routing",
+        duration: "30 min",
+        description: "Build a complete real-world application, integrate React Router navigation, and deploy to production.",
+        topics: ["Mini project: shopping cart or dashboard", "React Router v7", "useNavigate & useParams", "Production Deployment"]
       }
     ]
   },
