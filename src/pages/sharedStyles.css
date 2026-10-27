@@ -519,6 +519,11 @@
   cursor: pointer;
 }
 
+/* Settings panel stays white in screen mode, so keep these labels black */
+:root[data-theme="screen"] .notification-label {
+  color: #000;
+}
+
 .notification-checkbox {
   width: 18px;
   height: 18px;
