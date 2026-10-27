@@ -22,9 +22,8 @@
   color: var(--muted);
 }
 
-/* ==========================================================================
-   Navigation Bar (StudyFlix Minimalist Header)
-   ========================================================================== */
+/* 
+   Navigation Bar */
 .sf-navbar {
   display: flex;
   align-items: center;
@@ -123,9 +122,8 @@
   color: var(--muted);
 }
 
-/* ==========================================================================
-   Page Content Wrapper & Common Typography
-   ========================================================================== */
+/*
+   Page Content Wrapper & Common Typography*/
 .sf-content {
   padding: 32px 32px 64px;
   max-width: 100%;
@@ -209,9 +207,9 @@
   color: var(--text);
 }
 
-/* ==========================================================================
+/*
    FEATURE 4 — CONTINUE LEARNING HERO CARD
-   ========================================================================== */
+ */
 .sf-continue-section {
   margin-bottom: 40px;
 }
@@ -1095,6 +1093,835 @@
   background: var(--sf-success);
   border-color: var(--sf-success);
   color: white;
+}
+
+/* ==========================================================================
+   SINGLE-VIDEO COURSE EXPERIENCE & CURATED TRACKS
+   ========================================================================== */
+
+.sf-banner-feature-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  padding: 6px 14px;
+  border-radius: var(--sf-radius-full);
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+/* Quick 1-Click Track Preference Pills Above Video */
+.sf-track-pills-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: -4px;
+}
+
+.sf-track-pills-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+}
+
+.sf-track-pills-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sf-track-pill-btn {
+  background: color-mix(in srgb, var(--surface) 80%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  padding: 7px 15px;
+  border-radius: var(--sf-radius-full);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sf-track-pill-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.sf-track-pill-btn.active {
+  background: color-mix(in srgb, var(--accent) 15%, var(--surface));
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+/* Responsive YouTube Embed Viewport */
+.sf-video-viewport.sf-youtube-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #090a0f;
+  border-radius: var(--sf-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  display: block;
+}
+
+.sf-youtube-iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+}
+
+/* Video Info under the Player */
+.sf-video-info-card {
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: var(--sf-radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sf-video-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.sf-video-creator-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.sf-creator-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 15%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.sf-video-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 4px;
+}
+
+.sf-creator-subtext {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sf-creator-subtext strong {
+  color: var(--text);
+}
+
+.sf-video-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sf-btn-video-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--sf-radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  text-decoration: none;
+}
+
+.sf-btn-reset-video {
+  background: color-mix(in srgb, var(--surface) 80%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  color: var(--text);
+}
+
+.sf-btn-reset-video:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.sf-btn-youtube-external {
+  background: #ff000015;
+  color: #ff3333;
+  border: 1px solid #ff000040;
+}
+
+.sf-btn-youtube-external:hover {
+  background: #ff000025;
+  border-color: #ff3333;
+  transform: translateY(-1px);
+}
+
+.sf-video-badges-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sf-badge-pill {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--sf-radius-full);
+  background: color-mix(in srgb, var(--surface) 80%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  color: var(--muted);
+}
+
+.sf-badge-pill.sf-badge-track {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.sf-video-description-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Interactive Chapters & Timestamps Explorer */
+.sf-timestamps-section {
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: var(--sf-radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sf-timestamps-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sf-timestamps-heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 4px;
+}
+
+.sf-timestamps-subheading {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.sf-timestamps-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: var(--sf-radius-md);
+  padding: 8px 12px;
+  width: 260px;
+  color: var(--muted);
+  transition: var(--transition-normal);
+}
+
+.sf-timestamps-search-box:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.sf-timestamps-search-input {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 13px;
+  width: 100%;
+  outline: none;
+}
+
+.sf-search-clear-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0 4px;
+  font-size: 12px;
+}
+
+.sf-search-clear-btn:hover {
+  color: var(--text);
+}
+
+.sf-topic-filter-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sf-category-chip-btn {
+  background: color-mix(in srgb, var(--surface) 80%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  padding: 5px 12px;
+  border-radius: var(--sf-radius-full);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.sf-category-chip-btn:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+.sf-category-chip-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.sf-timestamps-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.sf-timestamp-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: color-mix(in srgb, var(--surface) 75%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: var(--sf-radius-md);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  user-select: none;
+}
+
+.sf-timestamp-row:hover {
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  transform: translateX(2px);
+}
+
+.sf-timestamp-row.now-playing {
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  border-color: var(--accent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+.sf-timestamp-row-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+
+.sf-timestamp-id {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.sf-timestamp-time-badge {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  padding: 3px 8px;
+  border-radius: var(--sf-radius-sm);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.sf-timestamp-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sf-timestamp-row-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.sf-now-playing-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: white;
+  padding: 4px 10px;
+  border-radius: var(--sf-radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+.sf-play-hint {
+  font-size: 12px;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.sf-timestamp-row:hover .sf-play-hint {
+  opacity: 1;
+}
+
+.sf-timestamp-ext-link {
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: var(--transition-normal);
+}
+
+.sf-timestamp-ext-link:hover {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.sf-no-timestamps-found {
+  text-align: center;
+  padding: 36px 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Curated Video Options (3 Tracks) */
+.sf-video-options-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sf-video-options-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sf-video-options-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.sf-video-options-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.sf-video-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.sf-video-option-card {
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: var(--sf-radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: var(--transition-normal);
+  position: relative;
+}
+
+.sf-video-option-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  transform: translateY(-2px);
+}
+
+.sf-video-option-card.selected {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.sf-option-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sf-option-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  padding: 4px 10px;
+  border-radius: var(--sf-radius-full);
+}
+
+.sf-option-difficulty {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.sf-option-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.sf-option-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
+  flex: 1;
+}
+
+.sf-option-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.sf-option-detail-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sf-option-detail-row strong {
+  color: var(--text);
+}
+
+.sf-btn-select-option {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--sf-radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  background: color-mix(in srgb, var(--surface) 80%, var(--bg));
+  color: var(--text);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.sf-btn-select-option:hover:not(.btn-watching) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.sf-btn-select-option.btn-watching {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  cursor: default;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+/* ==========================================================================
+   SYLLABUS CHECKLIST SIDEBAR
+   ========================================================================== */
+
+.sf-syllabus-header-card {
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: var(--sf-radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sf-syllabus-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sf-syllabus-pill-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--accent);
+}
+
+.sf-syllabus-main-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 2px 0 0;
+}
+
+.sf-syllabus-percentage-badge {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+.sf-syllabus-count-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sf-syllabus-complete-tag {
+  color: var(--sf-success);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.sf-syllabus-progress-track {
+  height: 8px;
+  background: color-mix(in srgb, var(--surface) 70%, var(--bg));
+  border-radius: var(--sf-radius-full);
+  overflow: hidden;
+}
+
+.sf-syllabus-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.sf-syllabus-quick-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.sf-syllabus-quick-btn:hover {
+  color: var(--accent);
+}
+
+.sf-dot-sep {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.sf-syllabus-modules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sf-syllabus-module-card {
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: var(--sf-radius-md);
+  overflow: hidden;
+  transition: var(--transition-normal);
+}
+
+.sf-syllabus-module-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.sf-syllabus-module-card.mod-done {
+  border-color: color-mix(in srgb, var(--sf-success) 35%, transparent);
+}
+
+.sf-syllabus-module-toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sf-syllabus-mod-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+
+.sf-mod-number-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--sf-radius-sm);
+  background: color-mix(in srgb, var(--surface) 80%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sf-syllabus-module-card.mod-done .sf-mod-number-badge {
+  background: var(--sf-success-light);
+  color: var(--sf-success);
+  border-color: color-mix(in srgb, var(--sf-success) 30%, transparent);
+}
+
+.sf-mod-heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sf-mod-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sf-mod-meta {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.sf-mod-chevron {
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sf-syllabus-topics-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px 14px 16px;
+  gap: 8px;
+}
+
+.sf-syllabus-topic-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--sf-radius-sm);
+  background: color-mix(in srgb, var(--surface) 80%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  user-select: none;
+}
+
+.sf-syllabus-topic-item:hover {
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.sf-syllabus-topic-item.topic-checked {
+  background: color-mix(in srgb, var(--sf-success) 8%, var(--surface));
+  border-color: color-mix(in srgb, var(--sf-success) 25%, transparent);
+}
+
+.sf-topic-native-checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sf-topic-custom-checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1.5px solid color-mix(in srgb, var(--text) 30%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition-normal);
+  background: var(--bg);
+  color: white;
+}
+
+.sf-syllabus-topic-item.topic-checked .sf-topic-custom-checkbox {
+  background: var(--sf-success);
+  border-color: var(--sf-success);
+}
+
+.sf-topic-label-text {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.sf-syllabus-topic-item.topic-checked .sf-topic-label-text {
+  color: var(--muted);
+  text-decoration: line-through;
 }
 
 /* ==========================================================================

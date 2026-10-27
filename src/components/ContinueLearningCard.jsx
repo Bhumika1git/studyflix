@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
 export default function ContinueLearningCard({ continueData }) {
-  if (!continueData || !continueData.course || !continueData.episode) {
+  if (!continueData || !continueData.course) {
     return null;
   }
 
-  const { course, episode, progressPercent, completedCount, totalEpisodes } = continueData;
+  const { course, progressPercent = 0, completedTopics = 0, totalTopics = 0, activeTrack } = continueData;
 
   return (
     <section className="sf-continue-section" aria-label="Continue Learning">
@@ -22,12 +22,17 @@ export default function ContinueLearningCard({ continueData }) {
           </div>
 
           <h3 className="sf-continue-episode-title">
-            Episode {episode.number} — {episode.title}
+            {course.title} — {activeTrack || "Single Comprehensive Course"}
           </h3>
+          <p style={{ margin: "4px 0 16px", fontSize: "14px", color: "var(--muted)" }}>
+            {course.tagline}
+          </p>
 
           <div className="sf-continue-progress-wrap">
             <div className="sf-progress-header">
-              <span>Overall Course Progress ({completedCount}/{totalEpisodes} Completed)</span>
+              <span>
+                Syllabus Progress {totalTopics > 0 ? `(${completedTopics}/${totalTopics} Topics Completed)` : ""}
+              </span>
               <span className="sf-progress-percent">{progressPercent}%</span>
             </div>
             <div className="sf-progress-track">
@@ -43,15 +48,15 @@ export default function ContinueLearningCard({ continueData }) {
           <Link
             to={`/course/${course.id}`}
             className="sf-btn-resume"
-            title={`Resume ${episode.title}`}
+            title={`Resume ${course.title}`}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <polygon points="5 3 19 12 5 21 5 3"></polygon>
             </svg>
-            <span>Resume Learning</span>
+            <span>Resume Course</span>
           </Link>
-          <span style={{ fontSize: "11px", color: "var(--sf-muted)" }}>
-            Est. remaining: {episode.duration}
+          <span style={{ fontSize: "11px", color: "var(--muted)" }}>
+            Full Duration: {course.totalDuration}
           </span>
         </div>
       </div>
