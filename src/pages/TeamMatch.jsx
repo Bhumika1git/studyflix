@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./TeamMatch.css";
 import StudentCard from "../components/StudentCard";
 import students from "../data/students";
@@ -9,6 +9,50 @@ function TeamMatch() {
   const [message, setMessage] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSkill, setSelectedSkill] = useState("All");
+
+    /* SENT REQUESTS */
+
+  const [sentRequests, setSentRequests] = useState(() => {
+    try {
+      return JSON.parse(
+        localStorage.getItem("teammatch-sent-requests")
+      ) || [];
+    } catch {
+      return [];
+    }
+  });
+
+  /* CHAT */
+
+  const [chatStudent, setChatStudent] = useState(null);
+  const [deleteConfirm, setDeleteConfirm] = useState(null);
+  const [chatMessages, setChatMessages] = useState(() => {
+    try {
+      return JSON.parse(
+        localStorage.getItem("teammatch-chat-messages")
+      ) || {};
+    } catch {
+      return {};
+    }
+  });
+
+  const [newChatMessage, setNewChatMessage] = useState("");
+
+  /* SAVE DATA */
+
+  useEffect(() => {
+    localStorage.setItem(
+      "teammatch-sent-requests",
+      JSON.stringify(sentRequests)
+    );
+  }, [sentRequests]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "teammatch-chat-messages",
+      JSON.stringify(chatMessages)
+    );
+  }, [chatMessages]);
 
   const [isDragging, setIsDragging] = useState(false);
   const [dragX, setDragX] = useState(0);
@@ -42,6 +86,112 @@ function TeamMatch() {
           currentStudent % filteredStudents.length
         ]
       : null;
+
+    /* ADD CONNECTION REQUEST */
+
+  const addRequest = (student) => {
+    setSentRequests((previous) => {
+      const alreadySent = previous.some(
+        (item) => item.name === student.name
+      );
+
+      if (alreadySent) return previous;
+
+      return [...previous, student];
+    });
+  };
+
+  /* DELETE CONNECTION REQUEST */
+
+  const deleteRequest = (studentName) => {
+    setSentRequests((previous) =>
+      previous.filter(
+        (student) => student.name !== studentName
+      )
+    );
+  };
+
+  /* SEND CHAT MESSAGE */
+
+  const sendChatMessage = (e) => {
+    e.preventDefault();
+
+    const text = newChatMessage.trim();
+
+    if (!text || !chatStudent) return;
+
+    const newMessage = {
+      id: Date.now(),
+      text: text
+    };
+
+    setChatMessages((previous) => ({
+      ...previous,
+      [chatStudent.name]: [
+        ...(previous[chatStudent.name] || []),
+        newMessage
+      ]
+    }));
+
+    setNewChatMessage("");
+  };
+
+  /* DELETE CHAT MESSAGE */
+
+  // const deleteChatMessage = (messageId) => {
+  //   if (!chatStudent) return;
+
+  //   setChatMessages((previous) => ({
+  //     ...previous,
+  //     [chatStudent.name]: (
+  //       previous[chatStudent.name] || []
+  //     ).filter((item) => item.id !== messageId)
+  //   }));
+  // };
+
+  /* ASK BEFORE DELETING ONE MESSAGE */
+const requestDeleteMessage = (messageId) => {
+  setDeleteConfirm({
+    type: "message",
+    messageId: messageId
+  });
+};
+
+/* ASK BEFORE CLEARING ALL MESSAGES */
+const requestClearAll = () => {
+  if (!chatStudent) return;
+
+  if ((chatMessages[chatStudent.name] || []).length === 0) {
+    return;
+  }
+
+  setDeleteConfirm({ type: "all" });
+};
+
+/* CONFIRM DELETE */
+const confirmDelete = () => {
+  if (!chatStudent || !deleteConfirm) return;
+
+  const studentName = chatStudent.name;
+
+  setChatMessages((previous) => {
+    const updated = { ...previous };
+
+    if (deleteConfirm.type === "all") {
+      updated[studentName] = [];
+    } else if (deleteConfirm.type === "message") {
+      updated[studentName] = (
+        previous[studentName] || []
+      ).filter(
+        (item) => item.id !== deleteConfirm.messageId
+      );
+    }
+
+    return updated;
+  });
+
+  setDeleteConfirm(null);
+};
 
   /* START DRAG */
 
@@ -91,6 +241,8 @@ function TeamMatch() {
 
     if (dragX > 120) {
       setSwipeDirection("right");
+
+    addRequest(current);
 
       setMessage(
         `Connection request sent to ${current.name}! ❤️`
@@ -162,6 +314,8 @@ function TeamMatch() {
 
   const handleConnect = () => {
     if (!displayedStudent) return;
+
+    addRequest(displayedStudent);
 
     setMessage(
       `Connection request sent to ${displayedStudent.name}! ❤️`
@@ -359,6 +513,10 @@ function TeamMatch() {
 
                 <StudentCard
                   student={displayedStudent}
+                  onMessage={(student) => {
+                    setChatStudent(student);
+                    setNewChatMessage("");
+                  }}
                 />
 
               </div>
@@ -433,6 +591,135 @@ function TeamMatch() {
           )}
 
         </section>
+              {/* SENT REQUESTS */}
+
+        <section className="teammatch-requests-section">
+          <h2>Sent Requests ({sentRequests.length})</h2>
+
+          {sentRequests.length === 0 ? (
+            <p>You haven't sent any connection requests yet.</p>
+          ) : (
+            sentRequests.map((student) => (
+              <div
+                className="teammatch-request-item"
+                key={student.name}
+              >
+                <div>
+                  <strong>{student.name}</strong>
+                  <p>{student.course} • {student.year}</p>
+                </div>
+
+                <button
+                  onClick={() => deleteRequest(student.name)}
+                >
+                  Remove
+                </button>
+              </div>
+            ))
+          )}
+        </section>
+
+        {/* CHAT POPUP */}
+
+        {chatStudent && (
+          <div className="teammatch-chat-popup">
+            <div className="teammatch-chat-header">
+              <h3>Chat with {chatStudent.name}</h3>
+
+              <div className="teammatch-chat-header-actions">
+                <button
+                  type="button"
+                  onClick={requestClearAll}
+                  title="Clear all messages"
+                >
+                  Clear All
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setChatStudent(null);
+                    setDeleteConfirm(null);
+                  }}
+                  aria-label="Close chat"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            <div className="teammatch-chat-messages">
+              {(chatMessages[chatStudent.name] || []).length === 0 ? (
+                <p>No messages yet. Say hello! 👋</p>
+              ) : (
+                (chatMessages[chatStudent.name] || []).map((item) => (
+                  <div
+                    className="teammatch-chat-message"
+                    key={item.id}
+                  >
+                    <span>{item.text}</span>
+
+                    <button
+                      type="button"
+                      onClick={() => requestDeleteMessage(item.id)}
+                      title="Delete message"
+                      aria-label={`Delete message: ${item.text}`}
+                    >
+                      🗑️
+                    </button>
+                  </div>
+                ))
+              )}
+            </div>
+
+            <form
+              className="teammatch-chat-form"
+              onSubmit={sendChatMessage}
+            >
+              <input
+                type="text"
+                placeholder="Type a message..."
+                value={newChatMessage}
+                onChange={(e) => setNewChatMessage(e.target.value)}
+              />
+
+              <button type="submit">Send</button>
+            </form>
+
+            {/* DELETE CONFIRMATION */}
+            {deleteConfirm && (
+              <div className="teammatch-delete-confirm">
+                <h4>
+                  {deleteConfirm.type === "all"
+                    ? "Clear all messages?"
+                    : "Delete this message?"}
+                </h4>
+
+                <p>
+                  {deleteConfirm.type === "all"
+                    ? "All messages in this chat will be deleted."
+                    : "Only this message will be deleted."}
+                </p>
+
+                <div className="teammatch-delete-actions">
+                  <button
+                    type="button"
+                    onClick={() => setDeleteConfirm(null)}
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={confirmDelete}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
       </main>
 
